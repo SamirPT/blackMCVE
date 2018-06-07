@@ -1,0 +1,128 @@
+<div class="aside-wrap">
+    <div class="navi-wrap">
+        <nav ui-nav class="navi clearfix">
+            <div class="text-warning-dker font-bold developed venueSettings" ng-hide="!venue.id">
+                <img class="thumb-sm" ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}">
+                <span class="padder-md">{{venue.name}}</span>
+                <i class="fa fa-gear m-r-sm bg-dark cursorPointer smallLeftPanelSettings" id="venueGear" style="font-size: 18px;" data-ng-click="venueSettingsToggle(venue.id);"></i>
+            </div>
+            <ul class="nav animated fadeIn" ng-if="venue.id && venue.venueType !== 'PROMOTER'">
+                <li class="leftPanelSettings" data-ng-class="{'active': smallScreenSettingsVisibility}">
+                    <a data-ng-click="toggleVenueSettings();">
+                        <span class="pull-right text-muted">
+                            <i class="fa fa-fw fa-angle-right" data-ng-if="!smallScreenSettingsVisibility"></i>
+                            <i class="fa fa-fw fa-angle-down" data-ng-if="smallScreenSettingsVisibility"></i>
+                        </span>
+                        <span>Venue Settings</span>
+                        <i class="fa fa-gear" style="font-size: 18px;"></i>
+                    </a>
+                    <ul class="nav nav-sub lt">
+                        <li><a><span>Venue Info</span></a></li>
+                        <li><a><span>Zones</span></a></li>
+                        <li ui-sref="tags({id: venue.id})" ui-sref-active="active"><a><span>Tags</span></a></li>
+                        <li><a><span>Facebook</span></a></li>
+                    </ul>
+                </li>
+                <li ui-sref="reservations({id: venue.id})" ui-sref-active="active" ng-if="permissions.canViewAndModifyAllReservations">
+                    <a>
+                        <i class="icon-book-open"></i>
+                        <span>Reservations</span>
+                    </a>
+                </li>
+                <li ui-sref="employees({id: venue.id})" ui-sref-active="active" ng-if="permissions.canViewAndManageEmployeeSection">
+                    <a>
+                        <i class="icon-users"></i>
+                        <span>Employee list</span>
+                    </a>
+                </li>
+                <li ui-sref="schedule({id: venue.id})" ui-sref-active="active">
+                    <a>
+                        <i class="icon-clock"></i>
+                        <span>My Assignments</span>
+                    </a>
+                </li>
+                <li ui-sref="events({id: venue.id})" ui-sref-active="active">
+                    <a>
+                        <i class="icon-diamond"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+                <!--<li ui-sref="clicker({id: venue.id})" ui-sref-active="active">
+                    <a>
+                        <i class="icon-equalizer"></i>
+                        <span>Clicker</span>
+                    </a>
+                </li>-->
+                <li ui-sref="tables({id: venue.id})" ui-sref-active="active" ng-if="permissions.canViewAndManageTableView">
+                    <a>
+                        <i class="icon-grid"></i>
+                        <span>Tables</span>
+                    </a>
+                </li>
+                <li ui-sref="promotions({id: venue.id})" ui-sref-active="active" ng-if="permissions.canManageVenueInfo">
+                    <a>
+                        <i class="icon-volume-2"></i>
+                        <span>Promotions</span>
+                    </a>
+                </li>
+                <li ui-sref="reports({id: venue.id})" ui-sref-active="active" ng-if="permissions.canSeeAndUseReportsSection">
+                    <a>
+                        <i class="icon-bar-chart"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li ui-sref="customers({id: venue.id})" ui-sref-active="active" ng-if="permissions.canViewClientsSection">
+                    <a>
+                        <i class="icon-user"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li ui-sref="eod({id: venue.id})" ui-sref-active="active" ng-if="permissions.canViewEODStatementAndConfirm">
+                    <a>
+                        <i class="icon-hourglass"></i>
+                        <span>End of Day</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav animated fadeIn" ng-if="venue.id && venue.venueType === 'PROMOTER'">
+                <li class="leftPanelSettings" data-ng-class="{'active': smallScreenSettingsVisibility}">
+                    <a data-ng-click="toggleVenueSettings();">
+                        <span class="pull-right text-muted">
+                            <i class="fa fa-fw fa-angle-right" data-ng-if="!smallScreenSettingsVisibility"></i>
+                            <i class="fa fa-fw fa-angle-down" data-ng-if="smallScreenSettingsVisibility"></i>
+                        </span>
+                        <span>Venue Settings</span>
+                        <i class="fa fa-gear" style="font-size: 18px;"></i>
+                    </a>
+                    <ul class="nav nav-sub lt">
+                        <li><a><span>Venue Info</span></a></li>
+                        <li><a><span>Zones</span></a></li>
+                        <li ui-sref="tags({id: venue.id})" ui-sref-active="active"><a><span>Tags</span></a></li>
+                        <li><a><span>Facebook</span></a></li>
+                    </ul>
+                </li>
+                <li ui-sref="associated({id: venue.id})" ui-sref-active="active">
+                    <a>
+                        <i class="icon-book-open"></i>
+                        <span>Associated Venues</span>
+                    </a>
+                </li>
+                <li ui-sref="employees({id: venue.id})" ui-sref-active="active">
+                    <a>
+                        <i class="icon-users"></i>
+                        <span>Employee list</span>
+                    </a>
+                </li>
+            </ul>
+            <ul ng-hide="venue.id" class="nav text-center animated fadeIn">
+                <li ui-sref="my_venues">
+                    <a>
+                        <div><i class="icon-info"></i></div>
+                        <div><span>Choose approved venue to see menu</span></div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="wrapper-sm text-muted text-center text-sm developed bottomStick"><span>Developed by </span>peller<span>.tech</span></div>
+    </div>
+</div>

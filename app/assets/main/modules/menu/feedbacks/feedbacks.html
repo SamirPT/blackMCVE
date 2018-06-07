@@ -1,0 +1,54 @@
+<div class="bg-white hbox h-auto wrapper">
+    <div class="col cover-pic">
+        <div ng-style="guest.userpic ? {'background-image': 'url(' + guest.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+        <div ng-if="guest.totalVisits && guest.totalReservations" style="line-height: 1.25;">Visits:
+            <span>{{guest.totalVisits || '-'}}/{{guest.totalReservations || '-'}}</span>
+        </div>
+    </div>
+    <div class="col text-left padder">
+        <div class="hbox h-auto">
+            <div class="col">
+                <div class="font-bold text-ellipsis">{{guest.fullName}}</div>
+                <div ng-if="state.params.userId" class="text-ellipsis">Bottle Service reservations: <span class="font-bold">{{guest.bsReservations || '-'}}</span></div>
+                <div ng-if="state.params.userId" class="text-ellipsis">Last Reservation: <span class="font-bold">{{guest.lastReservationDate}}</span></div>
+            </div>
+            <div class="col text-right">
+                <div class="btn bg-info no-shadow btn-addon" ng-click="editFeedback()">
+                    <i class="icon-note"></i>Add Note
+                </div>
+            </div>
+        </div>
+        <div class="text-lg m-t">
+            <span class="text-md text-muted">Notes: {{feedbacks.length}}</span>
+            <div class="pull-right rating">
+                <rating ng-model="guest.rating" max="5" state-on="'fa-star feedback m-l-xs'" state-off="'fa-star-o m-l-xs'" readonly="true"></rating>
+                <span class="feedback m-l-sm">{{guest.rating}} <span class="text-muted">|</span> 5</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-sm">
+    <div ng-if="spinner" class="text-center wrapper">
+        <i class="fa fa-spinner fa-2x fa-spin padder"></i>
+    </div>
+    <div ng-if="!spinner && feedbacks.length == 0" class="text-center text-muted text-lg wrapper-lg">
+        There is no feedbacks yet.
+    </div>
+    <div ng-if="!spinner" ng-repeat="feedback in feedbacks" class="col-xs-12 m-b-sm no-padder animated fadeIn">
+        <div class="btn hbox bg-white wrapper" ng-click="editFeedback(feedback)">
+            <div class="hbox">
+                <div class="col cover-pic">
+                    <div ng-style="feedback.author.userpic ? {'background-image': 'url(' + feedback.author.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                </div>
+                <div class="col padder text-left">
+                    <div>
+                        <span class="font-bold">{{feedback.author.fullName}}</span>
+                        <span class="pull-right font-normal text-sm">{{roles[feedback.authorRole]}}</span>
+                    </div>
+                    <div class="text-muted text-ellipsis">Reservation {{feedback.shortReservationInfo.reservationDate}}</div>
+                </div>
+            </div>
+            <div class="text-left" style="white-space: normal;">{{feedback.message}}</div>
+        </div>
+    </div>
+</div>

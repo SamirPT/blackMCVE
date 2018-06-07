@@ -1,0 +1,81 @@
+<div class="m-t-sm padder hbox h-auto">
+    <div class="col text-left font-bold v-middle">Payee {{$index + 1}} Info</div>
+    <div class="col text-right">
+        <div class="btn no-shadow bg-info text-xs" ng-if="$index === 0" ng-click="useExistingPayInfo()"
+             data-ng-disabled="existLoading">Use Existing Info
+            <i ng-if="existLoading" class="fa fa-spinner fa-spin m-l-xs"></i>
+        </div>
+        <div class="btn no-shadow thumb-sm no-padder" ng-if="$index > 0" ng-click="removePay($index)"><img ng-src="/assets/img/events_trash.png"/>
+        </div>
+    </div>
+</div>
+<div class="hbox h-auto">
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="firstName" type="text" ng-model="pay.firstName">
+            <label>First Name</label>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="lastName" type="text" ng-model="pay.lastName">
+            <label>Last Name</label>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="md-input">
+            <input name="address" type="text" ng-model="pay.address">
+            <label>Address</label>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="city" type="text" ng-model="pay.city">
+            <label>City</label>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="state" type="text" ng-model="pay.state">
+            <label>State</label>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="country" type="text" ng-model="pay.country">
+            <label>Country</label>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="postalCode" type="text" ng-model="pay.postalCode">
+            <label>Postal Code</label>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="md-input">
+            <input name="email" type="email" ng-model="pay.email">
+            <label>E-mail Address</label>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="md-input">
+            <input name="phoneNumber" type="text" ng-model="pay.phoneNumber" ng-pattern="/^\+?(\d{11})$/">
+            <label>Phone Number</label>
+            <div class="error-label">Phone number must be 11 digits</div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="companyName" type="text" ng-model="pay.companyName">
+            <label>Company Name</label>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="md-input">
+            <input name="dateOfBirth" type="text" ng-model="pay.dateOfBirth" ng-pattern="/\d{4}-\d{2}-\d{2}$/">
+            <label>D.O.B.</label>
+            <div class="error-label">(xxxx-xx-xx)</div>
+        </div>
+    </div>
+</div>

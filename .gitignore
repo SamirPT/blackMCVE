@@ -1,0 +1,12 @@
+logs
+target
+.DS_Store
+/conf/evolutions/
+/.sbtserver
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+/MrBlackAndroid

@@ -1,0 +1,70 @@
+<div class="bg-white hbox h-auto wrapper-sm">
+    <div class="btn bg-info no-shadow btn-addon" ng-click="addVenue()">
+        <i class="fa fa-plus"></i>Add Venue
+    </div>
+</div>
+<div class="wrapper-xs col-xs-12" ng-if="myVenues.venues.length > 0">
+    <div class="wrapper-xs text-info-dker font-bold">Venues</div>
+    <div ng-repeat="venue in myVenues.venues" class="col-sm-6 col-lg-4 wrapper-xs">
+        <div class="no-padder">
+            <div class="w-full no-radius no-padder bg-white cover-image">
+                <img class="w-full" ng-src="{{venue.coverUrl ? venue.coverUrl : '/assets/img/default_pic.png'}}"/>
+            </div>
+            <div class="bg-white hbox wrapper">
+                <div class="col thumb" style="height: 50px;">
+                    <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                </div>
+                <div class="col padder text-left">
+                    <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                    <div class="text-ellipsis text-success-dker">Approved</div>
+                </div>
+                <div class="col thumb-lg text-right v-middle">
+                    <div class="btn-group dropup pull-right">
+                        <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                            <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li class="text-center">
+                                <a data-ng-click="deleteAssociatedVenue(venue)">Delete</a>
+                            </li>
+                            <li class="text-center">
+                                <a ng-click="cancel()">Cancel</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-xs col-xs-12" ng-if="myVenues.events.length > 0">
+    <div class="wrapper-xs text-info-dker font-bold">Special Events</div>
+    <div ng-repeat="venue in myVenues.events" class="col-sm-6 col-lg-4 wrapper-xs">
+        <div class="no-padder">
+            <div class="bg-white hbox wrapper">
+                <div class="col thumb" style="height: 50px;">
+                    <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                </div>
+                <div class="col padder text-left">
+                    <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                    <div class="text-ellipsis text-success-dker">Approved</div>
+                </div>
+                <div class="col thumb-lg text-right v-middle">
+                    <div class="btn-group dropup pull-right">
+                        <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                            <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li class="text-center">
+                                <a data-ng-click="deleteAssociatedVenue(venue)">Delete</a>
+                            </li>
+                            <li class="text-center">
+                                <a ng-click="cancel()">Cancel</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

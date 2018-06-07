@@ -1,0 +1,39 @@
+@import to.guest.GuestReservationTicket
+@(ticket: GuestReservationTicket)
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0">
+		<title>@{ticket.getVenueName()} reservation</title>
+		<link href="@routes.Assets.versioned("libs/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("stylesheets/app.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("stylesheets/reservation.css")" rel="stylesheet">
+	</head>
+	<body>
+		<div class="app h-auto bg-dark dker app-header-fixed" style="padding-bottom: 20px; padding-top: 20px;">
+			<div class="textCenter textWhite">This is a confirmation of your reservation at</div>
+			<div class="textCenter textWhite" style="font-size: 30px;">@{ticket.getVenueName()}</div>
+			<div class="textCenter m-b-sm m-b-md">@{ticket.getDate()}</div>
+			<div class="m-b-lg cover-image">
+				@if(ticket.getGuestUserpic() != null) {
+					<div style="background-image:url('@{ticket.getGuestUserpic()}');" class="square"></div>
+				} else {
+					<img style="width: 75px; height: 75px;" src="data:image/png;base64,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"/>
+				}
+			</div>
+			<div class="textCenter text-lg m-t-md">@{ticket.getGuestName()}</div>
+			@if(ticket.getHasBottleService() != null) {
+				<div class="textCenter textWhite m-b-md bsTypeColor">+ Guests @{ticket.getGuestsNumber()}</div>
+			} else {
+				<div class="textCenter text-lg m-b-md guestListColor">Guest List</div>
+			}
+			<div class="textCenter m-b-md"><i class="glyphicon glyphicon-user"></i>&#9;Booked by <span class="textWhite">@{ticket.getBookedBy()}</span></div>
+			<div class="textCenter text-sm m-b-sm">QR Ticket</div>
+			<div class="textCenter">
+				<img style="max-width: 100px; max-height: 100px;" src="data:image/png;base64,@{ticket.getQrTicket()}"/>
+			</div>
+			<div class="textCenter text-sm m-t-sm">Powered by mr.Black</div>
+		</div>
+	</body>
+</html>

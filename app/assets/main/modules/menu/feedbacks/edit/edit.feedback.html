@@ -1,0 +1,40 @@
+<div class="bg-white hbox h-auto wrapper r-3x">
+    <div class="m-b-sm hbox">
+        <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+    </div>
+    <div class="hbox" ng-if="feedback.author">
+        <div class="col cover-pic">
+            <div ng-style="feedback.author.userpic ? {'background-image': 'url(' + feedback.author.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+        </div>
+        <div class="col text-left" style="padding-left: 15px;">
+            <div class="btn btn-rounded btn-icon pull-right" ng-click="deleteFeedback()"><i class="fa fa-trash"></i></div>
+            <div class="font-bold text-ellipsis">by {{feedback.author.fullName}}</div>
+            <div class="text-ellipsis">Reservation <span class="font-bold">{{feedback.shortReservationInfo.reservationDate}}</span></div>
+            <div class="text-lg m-t" ng-if="feedback.rating">
+                <div class="pull-right rating">
+                    <rating ng-model="feedback.rating" max="5" state-on="'fa-star feedback m-l-xs'" state-off="'fa-star-o m-l-xs'"></rating>
+                    <span class="feedback m-l-sm">{{feedback.rating}} <span class="text-muted">|</span> 5</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form name="feedbackForm">
+        <div class="m-t-sm">
+            <textarea class="form-control" ng-model="feedback.message" rows="3" placeholder="Your comment" ng-required="true"></textarea>
+        </div>
+        <div ng-if="!feedback.author" class="m-t-sm text-center rating text-lg">
+            <div class="text-muted text-sm">Your Rate</div>
+            <rating ng-model="feedback.rating" max="5" state-on="'fa-star feedback m-l-xs'" state-off="'fa-star-o m-l-xs'" ng-required="true"></rating>
+        </div>
+        <div class="text-muted text-center m-t-xs m-b-sm" ng-if="permissions.canAssignTags">Modify Tags</div>
+        <div class="text-left" ng-if="permissions.canAssignTags">
+            <div class="tag cursorPointer" data-ng-class="{'gainsboro': tag.selected}" data-ng-click="selectTag(tag);" data-ng-repeat="tag in tagsList">
+                #{{tag.name}}
+            </div>
+        </div>
+    </form>
+    <div class="hbox">
+        <div class="btn bg-info no-shadow pull-right" ng-disabled="feedbackForm.$invalid" ng-if="!feedback.author" ng-click="sendFeedback()">Send Feedback</div>
+        <div class="btn bg-info no-shadow pull-right" ng-if="feedback.author" ng-click="updateFeedback()">Update Feedback</div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "tech.peller.mrblackandroidwatch"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 23
+        versionName "1.0362"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField "String", "API_SERVER", "\"https://api.themrblack.com\""
+            buildConfigField "String", "API_SERVER", "\"http://35.182.30.25\""
+            buildConfigField "String", "STRIPE_KEY", "\"pk_live_mGqVcBiBpsKyBI4xz7ehDrdU\""
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            buildConfigField "String", "API_SERVER", "\"http://35.182.30.25\""
+//            buildConfigField "String", "API_SERVER", "\"https://api.themrblack.com\""
+            buildConfigField "String", "STRIPE_KEY", "\"pk_test_uz9fu5voOK2D3IvFQfEHrfO1\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath "io.realm:realm-gradle-plugin:4.2.0"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-v13:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.android.support:design:27.1.1'
+
+    compileOnly 'org.roboguice:roboblender:3.0.1'
+    annotationProcessor 'org.roboguice:roboblender:3.0.1'
+    implementation 'org.roboguice:roboguice:3.0.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.0.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+
+    implementation 'joda-time:joda-time:2.9.4'
+
+    implementation 'org.apache.commons:commons-lang3:3.7'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation 'com.google.firebase:firebase-messaging:17.0.0'
+
+    implementation 'com.azoft.carousellayoutmanager:carousel:1.2.1'
+}
+
+apply plugin: 'com.google.gms.google-services'

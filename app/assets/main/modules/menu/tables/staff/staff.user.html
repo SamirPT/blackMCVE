@@ -1,0 +1,11 @@
+<div class="btn col no-border bg-white wrapper">
+    <div class="hbox">
+        <div class="col cover-pic">
+            <div ng-style="staff.userpic ? {'background-image': 'url(' + staff.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+        </div>
+        <div class="col padder text-left">
+            <div class="font-bold text-ellipsis">{{staff.fullName}}</div>
+            <div class="text-muted text-ellipsis text-xs">Roles: <span ng-repeat="userRole in staff.preferredRoles">{{roles[userRole]}}{{$last ? '' : ', '}}</span></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<form novalidate name="contactInfoForm">
+    <div class="hbox h-auto wrapper-xs m-b-sm">
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="firstName" type="text" ng-model="customerInfo.contactInfo.firstName">
+                <label>First Name</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="lastName" type="text" ng-model="customerInfo.contactInfo.lastName">
+                <label>Last Name</label>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="md-input">
+                <input name="address" type="text" ng-model="customerInfo.contactInfo.address">
+                <label>Address</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="city" type="text" ng-model="customerInfo.contactInfo.city">
+                <label>City</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="state" type="text" ng-model="customerInfo.contactInfo.state">
+                <label>State</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="country" type="text" ng-model="customerInfo.contactInfo.country">
+                <label>Country</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="postalCode" type="text" ng-model="customerInfo.contactInfo.postalCode">
+                <label>Postal Code</label>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="md-input">
+                <input name="email" type="email" ng-model="customerInfo.contactInfo.email">
+                <label>E-mail Address</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="companyName" type="text" ng-model="customerInfo.contactInfo.companyName">
+                <label>Company Name</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="md-input">
+                <input name="dateOfBirth" type="text" ng-model="customerInfo.contactInfo.dateOfBirth">
+                <label class="date-error">D.O.B.</label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-info no-shadow wrapper-md w-full no-radius" data-ng-disabled="contactInfoForm.$pristine" data-ng-click="saveChanges();">Save</button>
+</form>

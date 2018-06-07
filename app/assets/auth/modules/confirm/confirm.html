@@ -1,0 +1,32 @@
+<div class="animated fadeIn">
+  <div class="container w-xxl w-auto-xs no-padder h-full text-center">
+    <div class="text-center">
+      <div class="m-b">
+        <img src="assets/img/sms_icon.png" class="w-xxs">
+      </div>
+      <div class="text-muted text-2x">Phone # Verification</div>
+      <div class="text-muted">A text message with your verification code was just send to {{user.phoneNumber}}</div>
+    </div>
+
+	<form action="/callback?client_name=FormClient" name="confirmForm" class="form-validation max-form-width" method="POST">
+	<input type="text" name="username" value="" hidden data-ng-model="user.phoneNumber"/>
+      <div class="container w wrapper">
+        <input data-ng-model="smsCode" placeholder="SMS Code" data-ui-mask="999999" data-ui-mask-placeholder name="password"
+               class="text-white form-control no-border b-b bg-dark dker input-lg text-center" data-ng-required="true">
+      </div>
+
+      <div class="m-b">
+        <a class="font-thin text-xs" data-ng-click="sendCode(user.phoneNumber)">Send code again</a>
+      </div>
+
+      <div class="h-box">
+        <div class="padder">
+          <button type="submit" data-ng-disabled="confirmForm.$invalid" class="w-full btn bg-btn-mrblack m-b">Confirm</button>
+        </div>
+        <div class="padder">
+          <button data-ui-sref="signin" class="w-full btn bg-dark-btn no-shadow m-b" data-ng-click="changePhone()">Use another number</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

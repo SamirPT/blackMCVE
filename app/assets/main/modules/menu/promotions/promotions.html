@@ -1,0 +1,31 @@
+<div class="hbox bg-white-only h-auto wrapper-sm">
+    <form name="promoForm" class="form-validation" ng-submit="submitPromoForm()">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="URL" ng-model="promotion.url"
+                   class="text-black form-control no-border b-b"
+                   ng-required="true">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" ng-model="promotion.message" rows="3" placeholder="Message" ng-required="true"></textarea>
+        </div>
+        <button type="submit" ng-disabled="promoForm.$invalid" class="btn bg-info pull-right padder-lg">Post</button>
+    </form>
+</div>
+<div class="wrapper-xs">
+    <div class="text-muted wrapper-xs">Post on the following walls:</div>
+    <div ng-repeat="user in users" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+        <div class="btn hbox b-a bg-white text-center wrapper-sm" ng-class="{'b-info' : selectedUsers[user.id]}" ng-click="selectUser(user.id)">
+            <i class="fa fa-check checkPromotion" ng-class="{'hidden' : !selectedUsers[user.id]}"></i>
+            <div class="pull-none thumb m-t-sm" style="height: 50px;">
+                <img class="r-2x" ng-src="{{user.userpic ? user.userpic : '/assets/img/default_pic.png'}}"/>
+            </div>
+            <div class="font-bold m-sm" style="height: 36px;">
+                <span>{{user.fullName}}</span>
+            </div>
+            <div class="font-bold m-sm">
+                <i class="icon-users v-middle"></i>
+                <span>{{user.numberOfFriends}}</span>
+            </div>
+        </div>
+    </div>
+</div>

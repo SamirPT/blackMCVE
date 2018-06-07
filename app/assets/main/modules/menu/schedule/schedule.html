@@ -1,0 +1,59 @@
+<div class="bg-white hbox h-auto wrapper">
+    <div class="col text-nowrap v-middle font-bold">{{currentEvent.name}}</div>
+    <div class="col text-right v-middle">
+        <div class="btn no-padder m-l" ng-click="chooseEvent()">
+            <img src="/assets/img/calendar.png" style="width: 30px;">
+        </div>
+    </div>
+</div>
+<div ng-if="!spinner" class="text-center wrapper">
+    <i class="fa fa-spinner fa-2x fa-spin padder"></i>
+</div>
+<div ng-if="schedule.reservations.length > 0 && spinner" class="wrapper-xs hbox h-auto">
+    <div ng-repeat="table in schedule.reservations" class="col-sm-12 col-md-6 col-lg-4 wrapper-xs">
+        <div class="b-a r">
+            <div class="col no-border bg-white wrapper">
+                <div class="tableName">
+                    <span>{{bottleService[table.bottleService]}} #{{table.tableInfo.placeNumber}}</span>
+                    <span ng-if="table.bottleMin && table.minSpend"> - Min ({{table.bottleMin}} Bottles / {{table.minSpend}})</span>
+                </div>
+                <div class="hbox h-auto">
+                    <div class="col cover-pic" style="position: relative; height: 40px;" ng-class="getStatusOpacity(table.status)">
+                        <div ng-style="table.guestInfo.userpic ? {'background-image': 'url(' + table.guestInfo.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                        <img src="/assets/img/must_enter.png" class="must-enter" ng-hide="!table.mustEnter">
+                    </div>
+                    <div class="col padder text-left" ng-class="getStatusOpacity(table.status)">
+                        <div class="font-bold text-ellipsis text-black">{{table.guestInfo.fullName}}</div>
+                        <div class="text-muted text-ellipsis text-xs">by {{table.bookedBy.fullName}}</div>
+                    </div>
+                    <div class="col thumb-lg text-right font-bold text-dark" ng-class="getStatusOpacity(table.status)">
+                        {{resStatuses[table.status]}}
+                    </div>
+                </div>
+                <div class="text-xs m-t-sm hbox" style="height: 2em; max-height: 2em;" ng-class="getStatusOpacity(table.status)">
+                    <span class="text-ellipsis" popover="{{table.bookingNote}}" popover-trigger="mouseenter">{{table.bookingNote}}</span>
+                </div>
+                <div class="m-t-sm">
+                    <div class="hbox">
+                        <div class="hbox" ng-repeat="reservation in [table]" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+                        <div class="col thumb-lg text-right">
+                            <div class="btn-group dropup pull-right">
+                                <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                                    <img src="/assets/img/tables/threeDots.png">
+                                </div>
+                                <ul class="dropdown-menu text-center">
+                                    <li class="text-center" ng-if="permissions.canReleaseAndCompleteTablesAssignedToMe"><a ng-click="changeReservationState(table.id, 'RELEASED')">Release</a></li>
+                                    <li class="text-center" ng-if="permissions.canReleaseAndCompleteTablesAssignedToMe"><a ng-click="changeReservationState(table.id, 'COMPLETED')">Complete</a></li>
+                                    <li class="text-center"><a ng-click="cancel()">Cancel</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="(schedule.reservations.length === 0 || !schedule.reservations) && spinner" class="text-muted text-center wrapper-sm">
+    No Assignments
+</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FlowLayout">
+        <attr name="paddingV" format="string" />
+        <attr name="paddingH" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="TagsWidget">
+        <attr name="mode" format="enum">
+            <enum name="simply" value="0" />
+            <enum name="editable" value="1" />
+            <enum name="checkable" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

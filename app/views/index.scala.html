@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="mrblack.main">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Mr.Black</title>
+
+		<link href="@routes.Assets.versioned("libs/bootstrap/dist/css/bootstrap-theme.min.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("libs/angular-ui-select/dist/select.min.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("libs/angularjs-toaster/toaster.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("simple-line-icons/css/simple-line-icons.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("stylesheets/animate/animate.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("libs/ngCropper/ngCropper.all.min.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("libs/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("stylesheets/app.css")" rel="stylesheet">
+		<link href="@routes.Assets.versioned("stylesheets/style_main.css")" rel="stylesheet">
+	</head>
+	<body>
+
+		<div class="app app-aside-fixed app-header-fixed">
+			<div id="header" class="app-header navbar" role="menu">
+				<div data-ng-include="'/assets/main/modules/header/header.html'" data-ng-controller="HeaderController"></div>
+			</div>
+			<aside id="aside" class="app-aside hidden-xs bg-dark" ng-controller="LeftPanelCtrl">
+				<div data-ng-include="'/assets/main/modules/left_panel/left_panel.html'"></div>
+			</aside>
+			<div id="content" class="app-content" role="main">
+				<div ui-view class="h-full animated fadeIn"></div>
+				<div id="venueSettingsBox" class="venueSettingsBox" click-outside="closeVenueSettings();" outside-if-not="venueGear" data-ng-controller="VenueSettingsCtrl" data-ng-include="'/assets/main/modules/left_panel/venueSettings.html'"></div>
+			</div>
+		</div>
+
+		<script src="@routes.Assets.versioned("libs/jquery/dist/jquery.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular/angular.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-click-outside/clickoutside.directive.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/bootstrap/dist/js/bootstrap.min.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-animate/angular-animate.min.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-bootstrap/ui-bootstrap-tpls.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-resource/angular-resource.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-ui-router/angular-ui-router.min.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-ui-select/dist/select.min.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-ui-utils/ui-mask.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angularjs-toaster/toastr.min.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/ui-toggle/ui-toggle.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/ngCropper/ngCropper.all.min.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/ngFileUpload/ng-file-upload.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular-sanitize/angular-sanitize.min.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/angular.easypiechart/angular.easypiechart.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/highcharts/highcharts.js")" type="application/javascript"></script>
+		<script src="@routes.Assets.versioned("libs/highcharts/data.js")"></script>
+		<script src="@routes.Assets.versioned("libs/angular-moment/moment.min.js")"></script>
+		<script src="@routes.Assets.versioned("libs/angular-moment/angular-moment.min.js")"></script>
+
+		<script src="/assets/main/app.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/header/header.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/header/logout.service.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/left_panel/left_panel.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/left_panel/venueSettings.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/account/account.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/account/modal_cropper/modal_cropper.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/venues/my_venues/my_venues.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/venues/venues/venues.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/venues/my_preferred_roles/my_preferred_roles.controller.js" type="application/javascript"></script>
+
+		<script src="/assets/main/modules/venues/venue_snapshot/venueSnapshot.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/venues/venue_snapshot/table_minimums/tableMinimums.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/tags/tags.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/clicker/clicker.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/employees/employees.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/employees/roles/roles.modal.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/events/events.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/events/detailed/detailed.events.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/events/modal_cropper/modal_cropper.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/promotions/promotions.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reservations/reservations.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reservations/reservation_details/reservation_details.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reservations/assign/assignTable.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reservations/move/moveReservation.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reservations/complete/complete.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reservations/tags/tags.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/schedule/schedule.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/tables/tables.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/tables/assign/assign.table.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/tables/staff/staff.table.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/tables/move/move.table.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/tables/edit/edit.table.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reports/reports.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reports/clicker/reports_clicker.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reports/employees/reports_employee.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reports/promoters/reports_promoter.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/reports/reservations/reports_reservation.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/feedbacks/feedbacks.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/feedbacks/edit/edit.feedback.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/events/modal_cropper/modal_cropper.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/customers/customers.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/customers/detailed/detailed.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/modal/event/event.modal.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/associated/associated.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/associated/venues/venues.controller.js" type="application/javascript"></script>
+		<script src="/assets/main/modules/menu/eod/eod.controller.js" type="application/javascript"></script>
+
+		<script src="/assets/main/services/user_profile.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/venue.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/reservation.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/dict.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/toastr.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/events.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/schedule.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/tables.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/feedbacks.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/clicker.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/search.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/reports.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/promotions.service.js" type="application/javascript"></script>
+		<script src="/assets/main/services/util.service.js" type="application/javascript"></script>
+	</body>
+</html>

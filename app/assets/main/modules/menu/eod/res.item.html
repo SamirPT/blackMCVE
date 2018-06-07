@@ -1,0 +1,163 @@
+<div>
+    <div class="res-header">
+        <span class="spend">
+            <span ng-if="reservation.minSpend">Min ${{::reservation.minSpend}}</span>
+            <span ng-if="reservation.minSpend && reservation.bottleMin">/</span>
+            <span ng-if="reservation.bottleMin">B{{::reservation.bottleMin}}</span>
+        </span>
+        <img class="inline time-icon" src="/assets/img/time.png">
+        <span class="time-arrived">{{::reservation.estimatedArrivalTime || '--:--'}}</span>
+    </div>
+    <div class="no-shadow hbox h-auto cursorPointer" ng-click="$event.originalEvent.dropdown || reservationDetails(reservation);">
+        <div class="status-vline" ng-class="statusColor[reservation.status]"></div>
+        <div class="res-content">
+            <div class="content">
+                <div class="hbox h-auto">
+                    <div class="col v-top cover-pic xs">
+                        <div ng-style="reservation.guestInfo.userpic ? {'background-image': 'url(' + reservation.guestInfo.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};"
+                             class="r-2x square xs"></div>
+                    </div>
+                    <div class="hbox h-auto v-top text-left">
+                        <div class="col" style="padding-left: 10px;">
+                            <div class="font-bold">{{::reservation.guestInfo.fullName}}</div>
+                            <div class="display-label text-xs">by {{::reservation.bookedBy.fullName}}</div>
+                        </div>
+                        <div class="col text-right" style="width: 100px;">
+                            <div ng-if="reservation.status !== 'APPROVED'" class="status font-bold"
+                                 ng-class="statusColor[reservation.status]">{{reservationStatuses[reservation.status]}}
+                            </div>
+                            <div ng-if="reservation.status === 'APPROVED'"
+                                 class="btn no-border r-2x bg-info btn-sm padder"
+                                 data-ng-disabled="arriveSpinner"
+                                 ng-click="changeReservationState(reservation.id, 'ARRIVED', $event)"
+                                 style="position: relative;">
+                                <span>Arrived</span>
+                                <div class="item-overlay r-2x bg-info text-center"
+                                     ng-class="{'active': arriveSpinner && reservation.id == currentClicked }">
+                                    <i class="fa fa-spinner fa-spin" style="font-size: 24px;"></i>
+                                </div>
+                            </div>
+                            <div ng-if="reservation.status !== 'APPROVED' && reservation.status !== 'CONFIRMED' && reservation.status !== 'CONFIRMED_COMPLETE'"
+                                 class="text-xs">
+                                {{reservation.arrivedGuys + reservation.arrivedGirls}}&nbsp;/&nbsp;{{::reservation.totalGuests}}
+                            </div>
+                            <div ng-if="reservation.status === 'CONFIRMED' || reservation.status === 'CONFIRMED_COMPLETE'"
+                                 class="text-xs">
+                                {{formattedTime(reservation.statusChangeTime)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="res-divider"></div>
+                <div class="m-b-xs" ng-if="reservation.bookingNote">{{::reservation.bookingNote}}</div>
+                <div class="tag" data-ng-repeat="tag in reservation.tags">#{{::tag}}</div>
+                <div ng-repeat="empl in reservation.staff">
+                    <div class="font-bold m-t-xs m-b-xs">
+                    <span class="v-middle m-r-xs">{{roles[empl.role]}}:&nbsp;<span
+                            class="font-normal">{{::empl.name}}</span></span>
+                        <div class="btn btn-rounded no-border no-padder delete-staff"
+                             ng-click="unassignStaffBatch(reservation.id, empl, $event)">
+                            <img ng-src="/assets/img/tables/deleteStaff.png" class="w-full v-top">
+                        </div>
+                    </div>
+                </div>
+                <div class="res-divider"></div>
+                <div class="hbox">
+                    <div class="hbox" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+                    <div class="col thumb-sm text-right"
+                         ng-if="reservation.status !== 'COMPLETED' && reservation.status !== 'CONFIRMED_COMPLETE'">
+                        <div class="btn-group dropup pull-right">
+                            <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots m-b-xs"
+                                 data-toggle="dropdown" ng-click="$event.originalEvent.dropdown = true">
+                                <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                            </div>
+                            <ul class="dropdown-menu">
+                                <li class="text-center">
+                                    <a ng-click="completeReservation(reservation, $event)">Complete</a>
+                                </li>
+                                <li class="text-center">
+                                    <a ng-click="cancel()">Cancel</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="reservation.status === 'COMPLETED' || reservation.status === 'CONFIRMED_COMPLETE'"
+                     class="m-t-n-xs">
+                    <div class="res-divider"></div>
+                    <div class="m-t-sm hbox h-auto m-b-sm">
+                        <div class="col v-top cover-pic xs">
+                            <div ng-style="reservation.completedBy.userpic ? {'background-image': 'url(' + reservation.completedBy.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};"
+                                 class="r-2x square xs"></div>
+                        </div>
+                        <div class="hbox h-auto v-top text-left">
+                            <div class="col" style="padding-left: 10px;">
+                                <div class="font-bold">Completed by</div>
+                                <div class="display-label text-xs">{{::reservation.completedBy.name}}
+                                    <span ng-if="reservation.completedBy.role">({{::reservation.completedBy.role}})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="font-bold" ng-class="{'res-completion': !reservation.completionFeedback.message}">
+                        Completion Feedback
+                    </div>
+                    <div class="m-b-sm"
+                         ng-class="{'res-completion': !reservation.completionFeedback.message}">
+                        {{::reservation.completionFeedback.message || 'No comments'}}
+                    </div>
+                </div>
+            </div>
+            <div class="spend"
+                 ng-if="reservation.status === 'COMPLETED' || reservation.status === 'CONFIRMED_COMPLETE'">
+                <div class="inline col-xs-6 no-padder" ng-class="{'res-completion': !reservation.bottleMin}">
+                    Table Min: <span class="font-bold">{{::reservation.bottleMin}}</span></div>
+                <div class="inline col-xs-6 no-padder" ng-class="{'res-completion': !reservation.totalSpent}">
+                    Actual Spent: <span class="font-bold">${{::reservation.totalSpent}}</span></div>
+                <div class="inline col-xs-6 no-padder"
+                     ng-class="{'res-completion': reservation.payees.length === 0}">
+                    Payee Info: <span class="font-bold">{{::reservation.payees.length > 0 ? "YES" : "NO"}}</span></div>
+                <div class="inline col-xs-6 no-padder"
+                     ng-class="{'res-completion': reservation.photos.length === 0}">
+                    Photo Notes: <span class="font-bold">{{::reservation.photos.length > 0 ? "YES" : "NO"}}</span></div>
+            </div>
+            <div ng-if="reservation.status === 'COMPLETED' || reservation.status === 'CONFIRMED_COMPLETE'"
+                 class="m-t-xs m-b-xs hbox h-auto">
+                <div ng-if="!reservation.confirmedBy.name" class="hbox res-completion m-t-xs">No confirmation</div>
+                <div ng-if="reservation.confirmedBy.name" class="hbox m-t-xs">
+                    <div class="col v-top cover-pic xs">
+                        <div ng-style="reservation.confirmedBy.userpic ? {'background-image': 'url(' + reservation.confirmedBy.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};"
+                             class="r-2x square xs"></div>
+                    </div>
+                    <div class="hbox h-auto v-top text-left">
+                        <div class="col" style="padding-left: 10px;">
+                            <div class="font-bold">Confirmed by</div>
+                            <div class="display-label text-xs">{{::reservation.confirmedBy.name}}
+                                <span ng-if="reservation.confirmedBy.role">({{::reservation.confirmedBy.role}})</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col thumb-sm text-right v-middle">
+                    <div class="btn-group dropup pull-right">
+                        <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots"
+                             data-toggle="dropdown" ng-click="$event.originalEvent.dropdown = true">
+                            <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li class="text-center" ng-if="reservation.status === 'COMPLETED'">
+                                <a ng-click="changeReservationState(reservation.id, 'CONFIRMED_COMPLETE', $event)">Confirm</a>
+                            </li>
+                            <li class="text-center" ng-if="reservation.status === 'CONFIRMED_COMPLETE'">
+                                <a ng-click="changeReservationState(reservation.id, 'COMPLETED', $event)">Unconfirm</a>
+                            </li>
+                            <li class="text-center">
+                                <a ng-click="cancel()">Cancel</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

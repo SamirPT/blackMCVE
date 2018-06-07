@@ -1,0 +1,25 @@
+<div class="animated fadeIn">
+  <div class="container w-xxl w-auto-xs no-padder h-full text-center">
+    <div>
+      <img src="assets/img/White_Logo_mrBlack.svg" class="w-xxs">
+      <div class="text-muted wrapper">Please verify your phone number</div>
+    </div>
+
+    <form name="signinForm" class="form-validation max-form-width" ng-submit="logIn()">
+      <div class="container w wrapper">
+        <input id="loginPhone" ui-mask="+9 999 999 9999" ng-model="user.phoneNumber" placeholder="Phone Number"
+               class="text-white form-control no-border b-b bg-dark dker text-center"
+               ng-required="true" data-model-view-value="true" ui-mask-placeholder>
+      </div>
+
+      <div class="h-box">
+        <div class="padder">
+          <button type="submit" ng-disabled="signinForm.$invalid || !spinner" class="w-full btn bg-btn-mrblack m-b">Log In <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin"></i></button>
+        </div>
+        <div class="padder">
+          <button ui-sref="signup" class="w-full btn bg-dark-btn no-shadow m-b">Not a Member yet?</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

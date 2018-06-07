@@ -1,0 +1,52 @@
+<div class="modal-header hbox">
+    <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+</div>
+<div class="modal-body hbox no-padder">
+    <div class="text-center wrapper-md">
+        <div class="cover-pic md">
+            <div ng-style="customerInfo.visitorInfo.userpic ? {'background-image': 'url(' + customerInfo.visitorInfo.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};"
+                 class="r-2x square md" style="width: 50px; height: 50px;"></div>
+        </div>
+    </div>
+    <div class="nav-tabs-black bg-white-only b-a">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="active">
+                <a class="text-center padder-v" data-target="#tab-1" role="tab" data-toggle="tab">
+                    Info
+                </a>
+            </li>
+            <li>
+                <a  class="text-center padder-v" data-target="#tab-2" role="tab" data-toggle="tab">
+                    Reservations
+                </a>
+            </li>
+            <li>
+                <a class="text-center padder-v" data-target="#tab-3" role="tab" data-toggle="tab">
+                    Notes
+                </a>
+            </li>
+            <li>
+                <a class="text-center padder-v" data-target="#tab-4" data-toggle="tab">
+                    Contact Info
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div ng-if="loading" class="text-center wrapper r-2x bg-light">
+            <i class="fa fa-spinner fa-2x fa-spin padder"></i>
+        </div>
+        <div role="tabpanel" class="tab-pane active bg-light lter r-2x" id="tab-1">
+            <div ng-include="'/assets/main/modules/menu/customers/detailed/templates/info.html'"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane bg-light lter r-2x" id="tab-2">
+            <div ng-include="'/assets/main/modules/menu/customers/detailed/templates/reservations.html'"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane bg-light lter r-2x" id="tab-3">
+            <div ng-include="'/assets/main/modules/menu/customers/detailed/templates/notes.html'"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane bg-white-only lter r-2x" id="tab-4">
+            <div ng-include="'/assets/main/modules/menu/customers/detailed/templates/contact.html'"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="bg-white hbox h-auto wrapper">
+    <div class="btn bg-info no-shadow btn-addon m-r-md" ng-click="detailedEvent({}, true)" ng-if="permissions.canCreateAndModifyEventInfo">
+        <i class="fa fa-plus m-r-fa-xs"></i>
+        <span class="hidden-min">Add Event</span>
+    </div>
+    <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevEventDate(date)"><i class="fa fa-angle-left fa-lg"></i></button>
+    <input type="button" class="b-a btn bg-light lter" datepicker-popup="{{format}}" show-button-bar="false" ng-click="open($event)" ng-model="date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-change="getEvents(date)" style="width: 220px;"/>
+    <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextEventDate(date)"><i class="fa fa-angle-right fa-lg"></i></button>
+</div>
+<div ng-if="events.length === 0 && spinner" class="wrapper-lg text-center">
+    <span class="text-2x text-danger">Venue is closed</span><br>
+    <span ng-if="permissions.canCreateAndModifyEventInfo">Create an Event to OPEN the Venue on this day. Tap "Add Event" to add one.</span>
+    <span ng-if="!permissions.canCreateAndModifyEventInfo">No events on this date</span>
+</div>
+<div ng-if="!spinner" class="text-center wrapper">
+    <i class="fa fa-spinner fa-2x fa-spin padder"></i>
+</div>
+<div ng-if="spinner" class="block wrapper-xs">
+    <div ng-repeat="event in events" class="col-sm-6 col-lg-4 wrapper-xs animated fadeIn">
+        <div class="btn no-padder b-a" ng-click="detailedEvent(event, false)">
+            <div class="bg-white hbox wrapper">
+                <div class="col cover-pic">
+                    <div ng-style="event.pictureUrl ? {'background-image': 'url(' + event.pictureUrl + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                </div>
+                <div class="col padder text-left">
+                    <div class="font-bold text-ellipsis">{{event.name}}</div>
+                    <div class="text-ellipsis">Starts at {{event.startsAt}}</div>
+                </div>
+                <div class="col thumb" ng-if="permissions.canCreateAndModifyEventInfo">
+                    <div class="btn btn-rounded btn-lg btn-icon pull-right" ng-click="deleteEvent(event.id, $event)"><img ng-src="/assets/img/events_trash.png"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

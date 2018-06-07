@@ -1,0 +1,83 @@
+<div class="m-b-xs" style="height: 60px;">
+    <div class="pull-left">
+        <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevDate('MONTHLY');"><i class="fa fa-angle-left fa-lg"></i></button>
+        <input type="button" class="b btn bg-light lter" datepicker-popup="{{format}}" ng-click="open($event)" ng-model="$parent.dateMonth" is-open="$parent.opened" datepicker-options="dateOptions" ng-required="true" show-button-bar="false" close-text="Close" ng-change="getReport(null, $parent.dateMonth, 'MONTHLY');"/>
+        <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextDate('MONTHLY');"><i class="fa fa-angle-right fa-lg"></i></button>
+        <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin padder"></i>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <select class="form-control" data-ng-model="$parent.selectedPromoterMonth" data-ng-options="promoter.name as promoter.name for promoter in promotersMonthly">
+                <option value="" disabled selected>Promo Company Name</option>
+            </select>
+            <span class="input-group-btn" data-ng-click="clearMonthFilter();">
+                <button type="submit" class="btn btn-default" style="border-color: #ccc;"><i class="glyphicon glyphicon-remove"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <input class="form-control" type="search" placeholder="Search" data-ng-model="searchedTextMonth">
+    </div>
+    <img class="pull-right cursorPointer" style="height: 60px;" src="/assets/img/reports/pdf.png" data-ng-click="getReportPDF(null, dateMonth, 'MONTHLY');">
+    <i ng-class="{'hidden':pdfSpinner}" class="fa fa-spinner fa-spin padder pull-right"></i>
+</div>
+<table class="table" data-ng-if="reservationItemsMonthly !== undefined && reservationItemsMonthly.length > 0">
+    <thead>
+    <tr class="feedbackColor">
+        <th></th>
+        <th>Resos</th>
+        <th>Guests</th>
+        <th>Spend</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Booked</td>
+        <td style="border: 1px solid #eaeff0;">{{tableMonth.bookedResos}}</td>
+        <td style="border: 1px solid #eaeff0;">{{tableMonth.bookedGuests}}</td>
+        <td>${{tableMonth.bookedSpend}}</td>
+    </tr>
+    <tr class="feedbackColor">
+        <td style="border-bottom: 1px solid #eaeff0;">Actual</td>
+        <td style="border: 1px solid #eaeff0;">{{tableMonth.actualResos}}</td>
+        <td style="border: 1px solid #eaeff0;">{{tableMonth.actualGuests}}</td>
+        <td style="border-bottom: 1px solid #eaeff0;">${{tableMonth.actualSpend}}</td>
+    </tr>
+    </tbody>
+</table>
+<div class="list-group-lg list-group-sp" data-ng-if="reservationItemsMonthly !== undefined && reservationItemsMonthly.length > 0">
+    <div data-ng-repeat="(sortedKey, sortedItem) in sortedItemsMonthly">
+        {{sortedKey}}
+        <div ng-repeat="reservationItem in sortedItem" class="animated fadeIn" data-ng-hide="(selectedPromoterMonth !== undefined) && (!reservationItem.promotionCompany.name.contains(selectedPromoterMonth))">
+            <div class="list-group-item clearfix" ng-cloak data-ng-hide="(searchedTextMonth !== undefined) && (!reservationItem.fullName.toLowerCase().contains(searchedTextMonth.toLowerCase()))">
+                <div class="no-padder">
+                    <div class="bg-white hbox wrapper">
+                        <div class="user-image r-2x" style="display: table-cell; vertical-align: top;">
+                            <img data-ng-if="reservationItem.userpic" ng-src="{{reservationItem.userpic ? reservationItem.userpic : '/assets/img/default_pic.png'}}" style="height: 43px;"/>
+                            <img data-ng-if="!reservationItem.userpic" style="height: 40px;" class="m-n" src="/assets/img/default_pic.png"/>
+                        </div>
+                        <div class="col padder text-left">
+                            <div class="font-bold text-ellipsis">{{reservationItem.fullName}}</div>
+                            <div class="text-muted">By {{reservationItem.reservedBy}}</div>
+                        </div>
+                        <div class="pull-right rating">
+                            <rating class="pull-right" data-ng-model="reservationItem.rating" max="5" state-on="'fa-star feedbackColor m-l-xs'" state-off="'fa-star-o m-l-xs'" readonly="true"></rating>
+                            <div class="text-muted" data-ng-if="reservationItem.arrived">Arrived {{reservationItem.arrived}}</div>
+                        </div>
+                    </div>
+                    <div class="wrapper" style="padding-top: 0;">
+                        <span class="pull-left" style="padding-left: 55px;">
+                            Min ${{reservationItem.minSpend}}
+                        </span>
+                        <span class="feedbackColor pull-right">
+                            Actual ${{reservationItem.actualSpent}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-ng-if="reservationItemsMonthly.length === 0" class="text-center">
+    No data on the requested parameters
+</div>

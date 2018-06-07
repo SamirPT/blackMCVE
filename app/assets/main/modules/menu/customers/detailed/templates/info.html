@@ -1,0 +1,39 @@
+<div class="wrapper-md">
+    <div class="font-bold text-black">{{customerInfo.visitorInfo.fullName}}</div>
+    <div class="rating">
+        <rating data-ng-model="customerInfo.visitorInfo.rating" max="5" state-on="'fa-star feedbackColor m-r-xs'" state-off="'fa-star-o m-r-xs'" readonly="true"></rating>
+        <span class="feedbackColor text-nowrap">{{customerInfo.visitorInfo.rating}} | 5</span>
+    </div>
+    <div class="md-input">
+        <textarea ng-model="customerInfo.customerNote" data-ng-change="hasChanged = true;" required></textarea>
+        <label>Customer Preference Note</label>
+    </div>
+    <div class="display-label m-t-sm">Total Spent: <span class="text-black font-bold">${{customerInfo.visitorInfo.totalSpent}}</span></div>
+    <br>
+    <div class="display-label">Last BS Res: <span class="text-black font-bold">{{(customerInfo.visitorInfo.lastBSReservationDate | date: "dd.MM.yyyy") || 'no yet'}}</span></div>
+    <div class="display-label">Visits BS: <span class="text-black font-bold">{{customerInfo.visitorInfo.bsVisits}}</span></div>
+    <br>
+    <div class="display-label">Last GL Res: <span class="text-black font-bold">{{(customerInfo.visitorInfo.lastGLReservationDate | date: "dd.MM.yyyy") || 'no yet'}}</span></div>
+    <div class="display-label">Visits GL: <span class="text-black font-bold">{{customerInfo.visitorInfo.glVisits}}</span></div>
+</div>
+<div class="wrapper-md bg-white-only">
+    <div class="display-label m-b-xs">First Booked by:</div>
+    <div>
+        <div class="cover-pic inline" style="margin-right: 10px;">
+            <div ng-style="customerInfo.firstBookedBy.userpic ? {'background-image': 'url(' + customerInfo.firstBookedBy.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};"
+                 class="r-2x square"></div>
+        </div>
+        <div class="inline v-top">
+            <div class="text-black font-bold">{{customerInfo.firstBookedBy.fullName}}</div>
+            <div class="display-label"><span ng-repeat="userRole in customerInfo.firstBookedBy.preferredRoles">{{roles[userRole]}}{{$last ? '' : ', '}}</span></div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-md hbox h-auto">
+    <div class="btn bg-info pull-right no-shadow" disabled>Add Tag</div>
+    <div class="display-label m-b-sm">Assigned Tags:</div>
+    <div class="tag" data-ng-repeat="tag in customerInfo.tags">
+        #{{tag}}
+    </div>
+</div>
+<div class="btn btn-info no-shadow wrapper-md w-full no-radius" data-ng-disabled="!hasChanged" data-ng-click="saveChanges(true);">Save</div>

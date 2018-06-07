@@ -1,0 +1,23 @@
+<div class="modal-header hbox chooseEventHeader">
+    <span class="font-bold">Choose event</span>
+</div>
+<div class="modal-body wrapper-xs hbox bg-light scroll-pane chooseEventContent">
+    <div ng-if="spinner" class="text-center wrapper">
+        <i class="fa fa-spinner fa-2x fa-spin padder"></i>
+    </div>
+    <div ng-if="!spinner" ng-repeat="event in events" class="col-xs-12 wrapper-xs animated fadeIn">
+        <div class="btn no-padder b-a" ng-class="{'b-info' : currentEvent.id === event.id}" ng-click="selectEvent(event)">
+            <div class="bg-white hbox wrapper">
+                <div class="col cover-pic">
+                    <div ng-style="event.pictureUrl ? {'background-image': 'url(' + event.pictureUrl + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                </div>
+                <div class="col padder text-left w-full">
+                    <div class="font-bold text-ellipsis">{{event.name}}</div>
+                    <div class="text-ellipsis">Starts at {{event.startsAt}}</div>
+                </div>
+                <i class="fa fa-check checkPromotion" ng-class="{'hidden' : currentEvent.id !== event.id}"></i>
+            </div>
+        </div>
+    </div>
+    <div ng-if="events.length === 0" class="text-center">No events today</div>
+</div>

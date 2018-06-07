@@ -1,0 +1,11 @@
+<div class="btn no-shadow no-border bg-white wrapper-md b-a r" data-ng-click="changeRoles(empl)">
+    <div class="hbox" ng-class="{'opacityScheduleStatus' : checkPrevious(empl.requestStatus)}">
+        <div class="col cover-pic">
+            <div ng-style="empl.userpic ? {'background-image': 'url(' + empl.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+        </div>
+        <div class="col padder text-left">
+            <div class="font-bold text-ellipsis">{{empl.fullName}}</div>
+            <div class="display-label">Since: {{empl.since | date:"dd.MM.yyyy"}}</div>
+        </div>
+    </div>
+</div>

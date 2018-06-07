@@ -1,0 +1,439 @@
+.app {
+    height: 100%;
+}
+
+.fb-button-color {
+    background-color: #3b5998;
+}
+
+.fb-button-color:hover {
+    background-color: #0e1f56;
+}
+.big-modal .modal-dialog{
+    max-width: 830px;
+}
+.img-container {
+    max-height: 800px;
+    max-width: 800px;
+}
+
+.userPicture {
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.btn-addon i {
+    background-color: transparent;
+}
+
+.app-aside-folded .developed > span, .developed > img {
+    display: none;
+}
+
+.developed > i {
+    float: right;
+}
+
+.app-aside-folded .developed > img {
+    display: block;
+    margin: auto;
+}
+
+div.cover-image {
+    height: 200px;
+    line-height: 200px;
+    overflow: hidden;
+    text-align: center;
+}
+
+div.cover-image img{
+    min-height: 100%;
+    margin: -100%;
+}
+
+.roundBtn {
+    font-size: 30px;
+}
+
+.noRightPadding {
+    padding-right: 0;
+}
+
+.noLeftPadding {
+    padding-left: 0;
+}
+
+.bottomPaddingXs {
+    padding-bottom: 5px;
+}
+
+.bottomStick {
+    position: absolute;
+    bottom: 0;
+}
+
+.clearBoth {
+    clear: both;
+}
+
+.toRight {
+    right: 0;
+}
+
+.must-enter {
+    width: 20px;
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+}
+
+.must-enter-reservation {
+    bottom: 40px;
+    position: absolute;
+    right: 40px;
+    width: 20px;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+.feedbackColor {
+    color: #F3A505;
+}
+
+div.user-image {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    text-align: center;
+}
+
+div.user-image img{
+    margin: -100%;
+}
+
+div.user-image-md {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    overflow: hidden;
+    text-align: center;
+}
+
+div.user-image-md img{
+    margin: -100%;
+}
+
+.rating i.glyphicon {
+    font-family: FontAwesome;
+}
+
+.feedback {
+    color: #F3A526;
+}
+
+.chart {
+    position: relative;
+    width: 60px;
+    text-align: center;
+    line-height: 60px;
+    vertical-align: middle;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.chart.women {
+    background-color: #CD52BE;
+}
+
+.chart.men {
+    background-color: #5898E4;
+}
+
+.chart.capacity {
+    background-color: #C7C3C8;
+}
+
+.chart > span {
+    font-weight: bold;
+    width: 70px;
+    text-align: center;
+}
+
+.checkPromotion {
+    position: absolute;
+    right: 15px;
+    color: #23b7e5;
+}
+
+.checkStaff {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #23b7e5;
+}
+
+.note {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.delete-staff {
+    background-color: #5E5361;
+    width: 20px;
+    height: 20px;
+}
+
+.menu-tables .modal-dialog{
+    max-width: 320px;
+    margin: 20px auto;
+}
+
+.table-menu {
+    left: auto;
+    right: 0;
+}
+
+.move-tables .modal-dialog{
+    max-width: 320px;
+    margin: 20px auto;
+}
+
+.move-tables .modal-content{
+    background-color: #edf1f2;
+}
+
+.assign-reservation .modal-dialog{
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.tag {
+    border: none;
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 12px;
+    background-color: #9baec5;
+    color: #fff;
+    margin: 0 5px 5px 0;
+}
+
+.gray {
+    background-color: #d6d6d6;
+}
+
+.gainsboro {
+    background-color: #5f7ea1;
+}
+
+.chooseEventHeader {
+    background-color: #fff;
+    border-radius: 6px 6px 0 0;
+}
+
+.chooseEventContent {
+    border-radius: 0 0 6px 6px;
+}
+
+.chart-sm {
+    position: relative;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.chart-sm.women {
+    background-color: #CD52BE;
+    color: #ffffff;
+}
+
+.chart-sm.men {
+    background-color: #5898E4;
+    color: #ffffff;
+}
+
+.chart-sm.capacity {
+    background-color: #ffffff;
+}
+
+.venueSettingsBox {
+    display: none;
+    position: absolute;
+    top: 50px;
+    z-index: 10000;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.venueSettingsListItem {
+    padding: 4px 15px;
+}
+
+.venueSettingsDivider {
+    margin: 4px 0;
+    height: 1px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.app-aside-folded .venueSettings {
+    text-align: center;
+}
+
+.app-aside-folded .venueSettings > i {
+    margin-right: 0;
+    float: none;
+}
+
+.text-women {
+    color: #CD52BE;
+}
+
+.text-men {
+    color: #5898E4;
+}
+
+.threeDots {
+    height: 30px;
+    width: 24px;
+    text-align: right;
+}
+
+.threeDots img {
+    vertical-align: sub;
+}
+
+.arrivedScheduleStatus {
+    color: #417505;
+}
+
+.opacityScheduleStatus {
+    opacity: 0.5;
+}
+
+.tableName {
+    color: #16346c;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.disabledClick {
+    pointer-events: none;
+}
+
+.grid-item {
+    visibility: visible !important;
+}
+
+@media (max-width: 539px) {
+    .hidden-min {
+        display: none;
+    }
+
+    .m-r-fa-xs {
+        margin-right: -12px !important;
+    }
+}
+
+@media (min-width: 540px) {
+    .hidden-max {
+        display: none;
+    }
+}
+
+.navbar-header > .active {
+    background-color: #2e3344;
+}
+
+div.cover-pic {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    line-height: 40px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.square {
+    float:left;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+div.cover-pic.md {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    line-height: 50px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.square.md {
+    float:left;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+div.cover-pic.xs {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.square.xs {
+    width: 36px;
+    height: 36px;
+}
+
+.table-title {
+    width: 70px;
+    font-weight: 700;
+    vertical-align: middle !important;
+}
+
+.nav-tabs-black .nav-tabs.nav-justified > li {
+    display: table-cell;
+    vertical-align: middle;
+    border-bottom: 1px transparent solid;
+    width: 1%;
+}
+
+.nav-tabs-black .nav-tabs.nav-justified > li {
+    display: table-cell;
+    vertical-align: middle;
+    width: 1%;
+}
+
+.nav-tabs-black .nav-tabs > li > a {
+    padding: 10px 0;
+    background: transparent !important;
+    border-color: transparent !important;
+    border-bottom: 0 !important;
+    border-radius: 0;
+}
+
+.nav-tabs-black .nav-tabs > li.active {
+    border-bottom-color: #23b7e5 !important;
+}

@@ -1,0 +1,10 @@
+<div class="modal-header hbox bg-white-only">
+    <span class="font-bold">Choose new date</span>
+</div>
+<div class="modal-body wrapper-xs hbox bg-light scroll-pane w-auto" style="margin: auto;">
+    <datepicker min-date="startDate" ng-model="moveDate" is-open="opened" datepicker-options="{{dateOptions}}"></datepicker>
+</div>
+<div class="modal-footer bg-white-only">
+    <div class="btn b-a pull-left" ng-click="cancel()">Close</div>
+    <div class="btn bg-info pull-right" data-ng-disabled="spinner" ng-click="getEvents(moveDate)">Move <i ng-if="spinner" class="fa fa-spinner fa-spin"></i></div>
+</div>

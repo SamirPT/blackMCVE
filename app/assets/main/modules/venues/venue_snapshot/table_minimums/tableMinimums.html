@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title">Table Minimums</h4>
+</div>
+<div class="modal-body">
+    <label>Bottle Service Min</label>
+    <input data-ng-model="venueState.minBottles" class="form-control m-b"/>
+    <label>Min Spend</label>
+    <input data-ng-model="venueState.minSpend" class="form-control m-b"/>
+</div>
+<div class="modal-footer clearBoth">
+    <button class="btn btn-info" data-ng-click="setMinimums();">Set</button>
+    <button class="btn pull-left" data-ng-click="cancel();">Cancel</button>
+</div>

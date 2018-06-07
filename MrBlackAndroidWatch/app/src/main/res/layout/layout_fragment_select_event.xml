@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/text_size_h2"
+        android:text="@string/selectEvent"
+        android:padding="@dimen/main_padding"
+        android:gravity="center"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/eventRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/noEvents"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/text_size_h1"
+        android:text="@string/noEvents"
+        android:gravity="center"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_button_height"
+        android:background="@color/mainButton"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_h1"
+        android:textStyle="bold"
+        android:text="@string/backButton"/>
+</LinearLayout>

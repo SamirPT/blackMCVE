@@ -1,0 +1,103 @@
+<div class="modal-header hbox">
+    <span class="col table-title">{{bottleService[table.tableInfo.bottleServiceType]}} #{{table.tableInfo.placeNumber}}</span>
+    <div class="col text-right">
+        <span class="text-info-dk v-middle" ng-hide="countSelected === 0"><span class="hidden-max">+</span>{{countSelected}} <span class="hidden-min">selected</span></span>
+        <span class="text-danger-dk v-middle" ng-hide="countDeselected === 0"><span class="hidden-max">-</span>{{countDeselected}} <span class="hidden-min">deselected</span></span>
+        <div class="btn bg-info b-info m-l-sm m-r-sm" ng-click="assignStaffBatch()" data-ng-disabled="countSelected === 0 && countDeselected === 0">
+            <i class="fa fa-plus hidden-max"></i>
+            <span class="hidden-min">Assign</span>
+        </div>
+        <div class="btn b-a" ng-click="cancel()">Close</div>
+    </div>
+</div>
+<div class="modal-body no-padder hbox bg-light scroll-pane">
+    <div class="nav-tabs-alt bg-white-only" >
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a data-target="#staff-1" role="tab" data-toggle="tab">
+                    Server
+                </a>
+            </li>
+            <li>
+                <a data-target="#staff-2" role="tab" data-toggle="tab">
+                    Busser
+                </a>
+            </li>
+            <li>
+                <a data-target="#staff-3" role="tab" data-toggle="tab">
+                    Host
+                </a>
+            </li>
+            <li>
+                <a data-target="#staff-4" role="tab" data-toggle="tab">
+                    All
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="staff-1">
+            <div class="wrapper-xs">
+                <div class="hbox">
+                    <div ng-repeat="staff in staff.servers" class="col-sm-6 wrapper-xs">
+                        <i class="fa fa-check checkStaff" ng-hide="!selectedStaff.SERVER[staff.id]"></i>
+                        <div data-ng-include="'/assets/main/modules/menu/tables/staff/staff.user.html'" ng-click="selectStaff('SERVER', staff.id)"
+                             class="b-a" ng-class="{'b-info' : selectedStaff.SERVER[staff.id]}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane staff-3" id="staff-2">
+            <div class="wrapper-xs">
+                <div class="hbox">
+                    <div ng-repeat="staff in staff.bussers" class="col-sm-6 wrapper-xs">
+                        <i class="fa fa-check checkStaff" ng-hide="!selectedStaff.BUSSER[staff.id]"></i>
+                        <div data-ng-include="'/assets/main/modules/menu/tables/staff/staff.user.html'" ng-click="selectStaff('BUSSER', staff.id)"
+                             class="b-a" ng-class="{'b-info' : selectedStaff.BUSSER[staff.id]}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane staff-3" id="staff-3">
+            <div class="wrapper-xs">
+                <div class="hbox">
+                    <div ng-repeat="staff in staff.hosts" class="col-sm-6 wrapper-xs">
+                        <i class="fa fa-check checkStaff" ng-hide="!selectedStaff.VIP_HOST[staff.id]"></i>
+                        <div data-ng-include="'/assets/main/modules/menu/tables/staff/staff.user.html'" ng-click="selectStaff('VIP_HOST', staff.id)"
+                             class="b-a" ng-class="{'b-info' : selectedStaff.VIP_HOST[staff.id]}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane staff-4" id="staff-4">
+            <div class="wrapper-xs">
+                <div class="hbox">
+                    <div class="wrapper-xs text-muted">Servers</div>
+                    <div class="hbox">
+                        <div ng-repeat="staff in staff.servers" class="col-sm-6 wrapper-xs">
+                            <i class="fa fa-check checkStaff" ng-hide="!selectedStaff.SERVER[staff.id]"></i>
+                            <div data-ng-include="'/assets/main/modules/menu/tables/staff/staff.user.html'" ng-click="selectStaff('SERVER', staff.id)"
+                                 class="b-a" ng-class="{'b-info' : selectedStaff.SERVER[staff.id]}"></div>
+                        </div>
+                    </div>
+                    <div class="wrapper-xs text-muted">Bussers</div>
+                    <div class="hbox">
+                        <div ng-repeat="staff in staff.bussers" class="col-sm-6 wrapper-xs">
+                            <i class="fa fa-check checkStaff" ng-hide="!selectedStaff.BUSSER[staff.id]"></i>
+                            <div data-ng-include="'/assets/main/modules/menu/tables/staff/staff.user.html'" ng-click="selectStaff('BUSSER', staff.id)"
+                                 class="b-a" ng-class="{'b-info' : selectedStaff.BUSSER[staff.id]}"></div>
+                        </div>
+                    </div>
+                    <div class="wrapper-xs text-muted">Hosts</div>
+                    <div class="hbox">
+                        <div ng-repeat="staff in staff.hosts" class="col-sm-6 wrapper-xs">
+                            <i class="fa fa-check checkStaff" ng-hide="!selectedStaff.VIP_HOST[staff.id]"></i>
+                            <div data-ng-include="'/assets/main/modules/menu/tables/staff/staff.user.html'" ng-click="selectStaff('VIP_HOST', staff.id)"
+                                 class="b-a" ng-class="{'b-info' : selectedStaff.VIP_HOST[staff.id]}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

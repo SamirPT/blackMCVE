@@ -1,0 +1,35 @@
+.textCenter {
+    text-align: center;
+}
+
+.textWhite {
+    color: #ffffff;
+}
+
+.textTitle {
+    font-size: 36px;
+}
+
+.guestListColor {
+    color: #F0B103;
+}
+
+div.cover-image {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    line-height: 75px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.square {
+	float:left;
+	position: relative;
+	width: 75px;
+	height: 75px;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	border-radius: 10px;
+}

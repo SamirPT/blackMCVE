@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+
+    <style name="AppTheme.InputTextHint">
+        <item name="android:textSize">@dimen/text_size_h1</item>
+        <item name="android:textColor">@color/greyText</item>
+    </style>
+
+    <!-- стиль для TextInputEditText внутри TIL и EditText -->
+    <style name="reservationDetailEditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/textlines</item>
+        <item name="android:paddingBottom">@dimen/text_input_bottom</item>
+        <item name="android:paddingTop">@dimen/text_input_bottom</item>
+        <item name="android:textColor">@color/whiteText</item>
+        <item name="android:textColorHint">@color/greyText</item>
+        <item name="android:textSize">@dimen/text_size_h2</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+</resources>

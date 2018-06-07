@@ -1,0 +1,191 @@
+@import "var";
+
+.md-input {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  margin: 20px 0 5px;
+  vertical-align: middle;
+
+  /* label */
+  & > label {
+    color: #999;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    white-space: nowrap;
+    pointer-events: none;
+    top: 0;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+
+  & input:focus, & input.ng-not-empty, & input.md-ui-mask, & textarea:focus, & textarea.ng-not-empty, & textarea.md-ui-mask {
+    & ~ label {
+      top: -15px;
+      font-size: 12px;
+    }
+  }
+
+  & input:focus, & textarea:focus {
+    border-width: 0 0 2px;
+    padding-bottom: 0;
+    border-bottom-color: @input-valid;
+
+    & ~ label {
+      color: @input-valid;
+    }
+  }
+
+  & input.ng-invalid {
+    border-width: 0 0 2px;
+    padding-bottom: 0;
+    border-bottom-color: @input-error;
+
+    & ~ label {
+      color: @input-error;
+    }
+
+    & ~ .error-label {
+      visibility: visible;
+    }
+  }
+
+  /* input, textarea */
+  & > input, & > textarea {
+    display: block;
+    font-size: 16px;
+    margin-top: 0;
+    color: #000;
+    background: none;
+    padding: 2px 0 1px;
+    border-width: 0;
+    border-bottom: 1px solid @input-color;
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    &:disabled {
+      border-bottom: 1px solid #C6C6C6;
+      color: @input-color;
+    }
+  }
+
+  & > input:focus, & > textarea:focus {
+    outline: none;
+  }
+
+  &.sub {
+    & input:focus, & input.ng-not-empty {
+      padding-left: 10px;
+
+      & ~ .sub-label {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    & .sub-label {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      color: black;
+      top: 2px;
+      left: 0;
+      font-size: 16px;
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+  }
+
+  &.small-value {
+    width: 35px;
+    margin: 10px 5px 15px;
+
+    & > input {
+      text-align: center;
+    }
+  }
+
+  & .error-label {
+    position: absolute;
+    color: @input-error;
+    top: 24px;
+    left: 0;
+    font-size: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+  }
+}
+
+.md-i-check {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  margin: 20px 0 5px;
+  vertical-align: middle;
+
+  & > label:first-child {
+    color: #999;
+    font-size: 11px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    white-space: nowrap;
+    top: -15px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+}
+
+.i-checks.md-check {
+
+  & > i {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+
+    &:before, &:after {
+      content: "";
+      position: absolute;
+      top: 16px;
+      width: 0;
+      height: 0;
+      background-color: transparent;
+      transition: all 0.2s;
+    }
+  }
+
+  & > input:checked + i {
+    background-color: @btn-blue;
+    border-color: @btn-blue;
+
+    &:before, &:after {
+      height: 2px;
+      background-color: #fff;
+    }
+
+    &:before {
+      width: 8px;
+      top: 16px;
+      left: 6px;
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      width: 14px;
+      top: 13px;
+      left: 10px;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.display-label {
+  color: @input-color;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="mainButton">#4F8DD6</color>
+
+    <color name="whiteText">#FFFFFF</color>
+    <color name="blueText">#4F8DD6</color>
+    <color name="greyText">#67616b</color>
+    <color name="lightGreyText">#86838B</color>
+    <color name="redText">#D34E48</color>
+
+    <color name="eventItemBack">#2B2432</color>
+
+    <color name="unassignedStatus">#9B9B9B</color>
+    <color name="assignedStatus">#B8E986</color>
+    <color name="arrivedStatus">#6094D1</color>
+    <color name="cancelledStatus">#7AD9C9</color>
+    <color name="releasedStatus">#C54F5D</color>
+    <color name="rejectedStatus">#C54F5D</color>
+    <color name="completedStatus">#D9D064</color>
+    <color name="confirmedCompletedStatus">#966E9F</color>
+    <color name="noShowStatus">#54548F</color>
+
+    <color name="tagBack">#969BA1</color>
+
+    <color name="mainMenuBack">#292929</color>
+</resources>

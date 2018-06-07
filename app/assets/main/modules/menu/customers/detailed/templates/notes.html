@@ -1,0 +1,24 @@
+<div class="hbox h-auto">
+    <div ng-repeat="note in customerInfo.notes" class="w-full m-b-xs m-t-xs wrapper-md bg-white-only box-shadow">
+        <div class="hbox h-auto m-b-sm">
+            <div class="col v-top cover-pic">
+                <div ng-style="note.author.userpic ? {'background-image': 'url(' + note.author.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+            </div>
+            <div class="hbox h-auto v-top text-left">
+                <div class="col pull-left m-l-md rating">
+                    <div class="font-bold text-ellipsis text-black">{{note.author.fullName}}</div>
+                    <div class="display-label">{{roles[note.authorRole]}}</div>
+                    <div class="display-label">Reservation <span class="font-bold">{{note.shortReservationInfo.reservationDate}}</span></div>
+                </div>
+                <div class="col pull-right text-right">
+                    <div class="text-muted">
+                        <div am-time-ago="resTimes[$index]">
+                            {{resTimes[$index] | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-dark">{{note.message}}</div>
+    </div>
+</div>

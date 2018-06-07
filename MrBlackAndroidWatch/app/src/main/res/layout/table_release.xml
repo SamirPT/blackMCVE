@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:padding="@dimen/big_padding"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/text_size_h1"
+        android:text="@string/table_release"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/big_padding"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/releaseNo"
+            android:layout_width="@dimen/main_menu_element_image_dimen"
+            android:layout_height="@dimen/main_menu_element_image_dimen"
+            android:src="@drawable/btn_no"
+            android:contentDescription="@string/empty_image_desc"
+            android:layout_marginStart="@dimen/big_padding"/>
+
+        <ImageView
+            android:id="@+id/releaseYes"
+            android:layout_width="@dimen/main_menu_element_image_dimen"
+            android:layout_height="@dimen/main_menu_element_image_dimen"
+            android:src="@drawable/btn_yes"
+            android:contentDescription="@string/empty_image_desc"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/big_padding"/>
+    </RelativeLayout>
+</LinearLayout>

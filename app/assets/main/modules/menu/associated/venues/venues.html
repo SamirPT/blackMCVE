@@ -1,0 +1,95 @@
+<div class="modal-header hbox">
+    <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+</div>
+<div class="modal-body hbox no-padder">
+    <div class="nav-tabs-black bg-white-only b-b">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="active">
+                <a class="text-center padder-v" data-target="#tab-1" role="tab" data-toggle="tab">
+                    Venues
+                </a>
+            </li>
+            <li>
+                <a  class="text-center padder-v" data-target="#tab-2" role="tab" data-toggle="tab">
+                    Special Events
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div ng-if="loading" class="text-center wrapper r-2x bg-light">
+            <i class="fa fa-spinner fa-2x fa-spin padder"></i>
+        </div>
+        <div role="tabpanel" class="tab-pane active bg-light lter r-2x wrapper-xs" id="tab-1">
+            <div class="text-center wrapper-lg text-muted" ng-if="!loading && venues.venues.length === 0">There is no venues to add.</div>
+            <div ng-repeat="venue in venues.venues" class="hbox h-auto wrapper-xs">
+                <div class="no-padder b-a">
+                    <div class="w-full no-radius no-padder bg-white cover-image">
+                        <img class="w-full" ng-src="{{venue.coverUrl ? venue.coverUrl : '/assets/img/default_pic.png'}}"/>
+                    </div>
+                    <div class="bg-white hbox wrapper">
+                        <div class="col thumb" style="height: 50px;">
+                            <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                        </div>
+                        <div class="col padder text-left">
+                            <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                            <div class="text-ellipsis" ng-class="status[venue.requestStatus].colorClass">{{status[venue.requestStatus].name}}</span></div>
+                        </div>
+                        <div class="col thumb-lg text-right v-middle">
+                            <div class="btn-group dropup pull-right">
+                                <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                                    <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                                </div>
+                                <ul class="dropdown-menu">
+                                    <li ng-if="venue.requestStatus !== 'REQUESTED'" class="text-center">
+                                        <a data-ng-click="createPromoRequest(venue)">Send Request</a>
+                                    </li>
+                                    <li ng-if="venue.requestStatus === 'REQUESTED'" class="text-center">
+                                        <a data-ng-click="deleteVenueRequest(venue)">Delete Request</a>
+                                    </li>
+                                    <li class="text-center">
+                                        <a ng-click="cancel()">Cancel</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane bg-light lter r-2x wrapper-xs" id="tab-2">
+            <div class="text-center wrapper-lg text-muted" ng-if="!loading && venues.events.length === 0">There is no special events to add.</div>
+            <div ng-repeat="venue in venues.events" class="hbox h-auto wrapper-xs">
+                <div class="no-padder b-a">
+                    <div class="bg-white hbox wrapper">
+                        <div class="col thumb" style="height: 50px;">
+                            <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                        </div>
+                        <div class="col padder text-left">
+                            <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                            <div class="text-ellipsis" ng-class="status[venue.requestStatus].colorClass">{{status[venue.requestStatus].name}}</span></div>
+                        </div>
+                        <div class="col thumb-lg text-right v-middle">
+                            <div class="btn-group dropup pull-right">
+                                <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                                    <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                                </div>
+                                <ul class="dropdown-menu">
+                                    <li ng-if="venue.requestStatus !== 'REQUESTED'" class="text-center">
+                                        <a data-ng-click="createPromoRequest(venue)">Send Request</a>
+                                    </li>
+                                    <li ng-if="venue.requestStatus === 'REQUESTED'" class="text-center">
+                                        <a data-ng-click="deleteVenueRequest(venue)">Delete Request</a>
+                                    </li>
+                                    <li class="text-center">
+                                        <a ng-click="cancel()">Cancel</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

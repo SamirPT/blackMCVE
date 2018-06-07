@@ -1,0 +1,66 @@
+<div class="bg-white-only h-auto wrapper">
+    <div class="hbox m-b-sm v-middle">
+        <span class="font-bold">Edit Tables</span>
+        <div class="col btn b-a bg-white pull-right" ng-click="cancel()">Close</div>
+    </div>
+    <div class="hbox h-auto">
+        <form name="tableForm" class="hbox">
+            <ui-select ng-model="currentTable.tableInfo.bottleServiceType" theme="bootstrap" class="col w-md" ng-required="true">
+                <ui-select-match placeholder="Section Name">{{bottleService[currentTable.tableInfo.bottleServiceType]}}</ui-select-match>
+                <ui-select-choices class="w-md" repeat="service.key as (key, service) in bottleService | filter: {'value':$select.search}">
+                    <div ng-bind-html="service.value | highlight: $select.search.key"></div>
+                </ui-select-choices>
+            </ui-select>
+            <input type="text" name="placeNumber" placeholder="Place Number" ng-model="currentTable.tableInfo.placeNumber"
+                   class="col w-xs text-black text-center m-l no-border b-b"
+                   ng-required="true" popover="Place Number" popover-trigger="mouseenter" popover-placement="bottom">
+        </form>
+        <div class="m-t-xs">
+            <div ng-disabled="tableForm.$invalid || !spinner" class="m-l btn bg-info dk no-shadow pull-right" ng-click="createTable(currentTable.tableInfo)">Create Table</div>
+            <div ng-disabled="tableForm.$invalid || !spinner" class="btn bg-info dk no-shadow pull-right" ng-click="updateTable(currentTable.tableInfo)">Update Table</div>
+            <div class="pull-right" ng-class="{'hidden':spinner}">
+                <i class="fa fa-lg fa-spinner fa-spin padder "></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-xs bg-light">
+    <div class="text-muted wrapper-xs">Tables</div>
+    <div class="hbox">
+        <div ng-repeat="table in tables.tables.opened" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+        <div ng-repeat="table in tables.tables.closed" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+        <div ng-repeat="table in tables.tables.assigned" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+    </div>
+
+    <div class="text-muted wrapper-xs">Standups</div>
+    <div class="hbox">
+        <div ng-repeat="table in tables.standups.opened" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+        <div ng-repeat="table in tables.standups.closed" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+        <div ng-repeat="table in tables.standups.assigned" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+    </div>
+
+    <div class="text-muted wrapper-xs">Bars</div>
+    <div class="hbox">
+        <div ng-repeat="table in tables.bars.opened" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+        <div ng-repeat="table in tables.bars.closed" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+        <div ng-repeat="table in tables.bars.assigned" class="col-xs-6 col-sm-4 col-lg-3 wrapper-xs">
+            <div data-ng-include="'/assets/main/modules/menu/tables/edit/table.edit.item.html'"></div>
+        </div>
+    </div>
+</div>

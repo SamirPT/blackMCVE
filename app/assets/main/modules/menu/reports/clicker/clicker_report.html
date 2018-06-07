@@ -1,0 +1,108 @@
+<div class="bg-white w-full h-full" style="display: table;">
+    <div class="nav-tabs-alt" >
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a data-target="#tab-1" role="tab" data-toggle="tab">
+                    Today
+                </a>
+            </li>
+            <li>
+                <a data-target="#tab-2" role="tab" data-toggle="tab">
+                    Week
+                </a>
+            </li>
+            <li>
+                <a data-target="#tab-3" role="tab" data-toggle="tab">
+                    Month
+                </a>
+            </li>
+            <li>
+                <a data-target="#tab-4" role="tab" data-toggle="tab">
+                    Date Range
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content bg-white">
+        <div role="tabpanel" class="tab-pane active" id="tab-1">
+            <div class="wrapper-md" style="padding-left: 0;">
+                <div>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevDate('DAILY')"><i class="fa fa-angle-left fa-lg"></i></button>
+                    <input type="button" class="b btn bg-light lter" datepicker-popup="{{format}}" ng-click="open($event)" ng-model="date" is-open="opened" datepicker-options="dateOptions" ng-required="true" show-button-bar="false" close-text="Close" ng-change="getReport(null, date, 'DAILY')"/>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextDate('DAILY')"><i class="fa fa-angle-right fa-lg"></i></button>
+                    <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin padder"></i>
+                    <img class="pull-right cursorPointer" style="height: 60px;" src="/assets/img/reports/pdf.png" data-ng-click="getReportPDF(null, date, 'DAILY');">
+                    <i ng-class="{'hidden':pdfSpinner}" class="fa fa-spinner fa-spin padder pull-right"></i>
+                </div>
+            </div>
+            <div id="dailyContainer" style="min-width: 310px; height: 400px; margin: 0"></div>
+            <div class="text-center" data-ng-show="womanAmount >= 0">
+                <div class="feedbackColor m-b-xs" style="font-size: 25px;">Total Throughput: {{womanAmount + menAmount}}</div>
+                <div class="m-b">
+                    <span class="text-women" style="font-size: 20px;">Women: {{womanAmount}}</span><span style="font-size: 20px;"> / </span><span class="text-men" style="font-size: 20px;">Men: {{menAmount}}</span>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane tab-2" id="tab-2">
+            <div class="wrapper-md" style="padding-left: 0;">
+                <div>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevDate('WEEKLY')"><i class="fa fa-angle-left fa-lg"></i></button>
+                    <input type="button" class="b btn bg-light lter" datepicker-popup="{{format}}" ng-click="open($event)" ng-model="dateWeek" is-open="opened" datepicker-options="dateOptions" ng-required="true" show-button-bar="false" close-text="Close" ng-change="getReport(null, dateWeek, 'WEEKLY')"/>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextDate('WEEKLY')"><i class="fa fa-angle-right fa-lg"></i></button>
+                    <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin padder"></i>
+                    <img class="pull-right cursorPointer" style="height: 60px;" src="/assets/img/reports/pdf.png" data-ng-click="getReportPDF(null, dateWeek, 'WEEKLY');">
+                    <i ng-class="{'hidden':pdfSpinner}" class="fa fa-spinner fa-spin padder pull-right"></i>
+                </div>
+            </div>
+            <div id="weeklyContainer" style="min-width: 310px; height: 400px; margin: 0"></div>
+            <div class="text-center" data-ng-show="womanAmountWeekly >= 0">
+                <div class="feedbackColor m-b-xs" style="font-size: 25px;">Total Throughput: {{womanAmountWeekly + menAmountWeekly}}</div>
+                <div class="m-b">
+                    <span class="text-women" style="font-size: 20px;">Women: {{womanAmountWeekly}}</span><span style="font-size: 20px;"> / </span><span class="text-men" style="font-size: 20px;">Men: {{menAmountWeekly}}</span>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane tab-3" id="tab-3">
+            <div class="wrapper-md" style="padding-left: 0;">
+                <div>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevDate('MONTHLY')"><i class="fa fa-angle-left fa-lg"></i></button>
+                    <input type="button" class="b btn bg-light lter" datepicker-popup="{{format}}" ng-click="open($event)" ng-model="dateMonth" is-open="opened" datepicker-options="dateOptions" ng-required="true" show-button-bar="false" close-text="Close" ng-change="getReport(null, dateMonth, 'MONTHLY')"/>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextDate('MONTHLY')"><i class="fa fa-angle-right fa-lg"></i></button>
+                    <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin padder"></i>
+                    <img class="pull-right cursorPointer" style="height: 60px;" src="/assets/img/reports/pdf.png" data-ng-click="getReportPDF(null, dateMonth, 'MONTHLY');">
+                    <i ng-class="{'hidden':pdfSpinner}" class="fa fa-spinner fa-spin padder pull-right"></i>
+                </div>
+            </div>
+            <div id="monthlyContainer" style="min-width: 310px; height: 400px; margin: 0"></div>
+            <div class="text-center" data-ng-show="womanAmountMonthly >= 0">
+                <div class="feedbackColor m-b-xs" style="font-size: 25px;">Total Throughput: {{womanAmountMonthly + menAmountMonthly}}</div>
+                <div class="m-b">
+                    <span class="text-women" style="font-size: 20px;">Women: {{womanAmountMonthly}}</span><span style="font-size: 20px;"> / </span><span class="text-men" style="font-size: 20px;">Men: {{menAmountMonthly}}</span>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-4">
+            <div class="wrapper-md" style="padding-left: 0;">
+                <div>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevDate('INTERVAL', dateRangeStart, null)"><i class="fa fa-angle-left fa-lg"></i></button>
+                    <input type="button" class="b btn bg-light lter" datepicker-popup="{{format}}" ng-click="open($event)" ng-model="dateRangeStart" is-open="opened" datepicker-options="dateOptions" ng-required="true" show-button-bar="false" close-text="Close" ng-change="getReport(dateRangeStart, dateRangeEnd, 'INTERVAL')"/>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextDate('INTERVAL', dateRangeStart, null)"><i class="fa fa-angle-right fa-lg"></i></button>
+                    <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin padder"></i>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevDate('INTERVAL', null, dateRangeEnd)"><i class="fa fa-angle-left fa-lg"></i></button>
+                    <input type="button" class="b btn bg-light lter" datepicker-popup="{{format}}" ng-click="openSecondCalendar($event)" ng-model="dateRangeEnd" is-open="opened2" datepicker-options="dateOptions" ng-required="true" show-button-bar="false" close-text="Close" ng-change="getReport(dateRangeStart, dateRangeEnd, 'INTERVAL')"/>
+                    <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextDate('INTERVAL', null, dateRangeEnd)"><i class="fa fa-angle-right fa-lg"></i></button>
+                    <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin padder"></i>
+                    <img class="pull-right cursorPointer" style="height: 60px;" src="/assets/img/reports/pdf.png" data-ng-click="getReportPDF(dateRangeStart, dateRangeEnd, 'INTERVAL');">
+                    <i ng-class="{'hidden':pdfSpinner}" class="fa fa-spinner fa-spin padder pull-right"></i>
+                </div>
+            </div>
+            <div id="intervalContainer" style="min-width: 310px; height: 400px; margin: 0"></div>
+            <div class="text-center" data-ng-show="womanAmountInterval >= 0">
+                <div class="feedbackColor m-b-xs" style="font-size: 25px;">Total Throughput: {{womanAmountInterval + menAmountInterval}}</div>
+                <div class="m-b">
+                    <span class="text-women" style="font-size: 20px;">Women: {{womanAmountInterval}}</span><span style="font-size: 20px;"> / </span><span class="text-men" style="font-size: 20px;">Men: {{menAmountInterval}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Размеры для android watch-->
+    <dimen name="text_size_h1">18sp</dimen>
+    <dimen name="text_size_h2">16sp</dimen>
+    <dimen name="text_size_h3">14sp</dimen>
+    <dimen name="text_size_h4">12sp</dimen>
+
+    <dimen name="main_padding">8dp</dimen>
+    <dimen name="big_padding">16dp</dimen>
+    <dimen name="main_button_height">40dp</dimen>
+
+    <dimen name="text_input_bottom">0dp</dimen>
+
+    <dimen name="start_logo_dimens">100dp</dimen>
+
+    <dimen name="list_element_venue_width">100dp</dimen>
+    <dimen name="venue_image_height">120dp</dimen>
+    <dimen name="venue_name_height">40dp</dimen>
+
+    <dimen name="event_pic_dimens">32dp</dimen>
+
+    <dimen name="reservation_element_margin">40dp</dimen>
+
+    <dimen name="main_menu_element_height">216dp</dimen>
+    <dimen name="main_menu_element_image_dimen">32dp</dimen>
+
+    <dimen name="res_menu_element_image_dimen">50dp</dimen>
+
+    <dimen name="parade_icon_dimen">32dp</dimen>
+</resources>

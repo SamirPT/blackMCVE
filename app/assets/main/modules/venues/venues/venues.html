@@ -1,0 +1,71 @@
+<div class="bg-white hbox h-auto wrapper b-b">
+    <div class="btn b-a bg-white-only" ui-sref="my_venues">Back</div>
+</div>
+<div class="nav-tabs-alt bg-white-only">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a data-target="#tab-1" role="tab" data-toggle="tab">
+                Venues
+            </a>
+        </li>
+        <li>
+            <a data-target="#tab-2" role="tab" data-toggle="tab">
+                Special Events
+            </a>
+        </li>
+        <li>
+            <a data-target="#tab-3" role="tab" data-toggle="tab">
+                Promoters
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="tab-1">
+        <div class="wrapper-xs">
+            <div ng-if="venues.venues.length > 0" ng-repeat="venue in venues.venues" class="col-sm-6 col-lg-4 wrapper-xs">
+                <div class="btn bg-white hbox wrapper-sm b-a" ng-click="selectVenue(venue)">
+                    <div class="col thumb-md" style="height: 64px;">
+                        <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                    </div>
+                    <div class="col text-left" style="padding-left: 15px;">
+                        <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                        <div class="text-ellipsis">{{venue.address}}</div>
+                        <div class="text-ellipsis" ng-hide="venue.requestStatus === 'PREVIOUS'">Status: <span ng-class="status[venue.requestStatus].colorClass">{{status[venue.requestStatus].name}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="venues.venues.length === 0" class="text-center">There is no venues to add.</div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tab-2">
+        <div class="wrapper-xs">
+            <div ng-if="venues.events.length > 0" ng-repeat="venue in venues.events" class="col-sm-6 col-lg-4 wrapper-xs">
+                <div class="btn bg-white hbox wrapper-sm b-a" ng-click="selectVenue(venue)">
+                    <div class="col thumb-md" style="height: 64px;">
+                        <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                    </div>
+                    <div class="col text-left" style="padding-left: 15px;">
+                        <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                        <div class="text-ellipsis">{{venue.address}}</div>
+                        <div class="text-ellipsis" ng-hide="venue.requestStatus === 'PREVIOUS'">Status: <span ng-class="status[venue.requestStatus].colorClass">{{status[venue.requestStatus].name}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="venues.events.length === 0" class="text-center">There is no venues to add.</div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tab-3">
+        <div class="wrapper-xs">
+            <div ng-if="venues.promoters.length > 0" ng-repeat="venue in venues.promoters" class="col-sm-6 col-lg-4 wrapper-xs">
+                <div class="btn bg-white hbox wrapper-sm b-a" ng-click="selectVenue(venue)">
+                    <div class="col text-left" style="padding-left: 10px;">
+                        <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                        <div class="text-ellipsis" ng-hide="venue.requestStatus === 'PREVIOUS'">Status: <span ng-class="status[venue.requestStatus].colorClass">{{status[venue.requestStatus].name}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="venues.promoters.length === 0" class="text-center">There is no venues to add.</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="w-full h-full" style="display: table;">
+    <div class="hbox h-auto padder-v bg-white-only">
+        <div class="col-sm-2">
+            <input class="form-control" type="search" placeholder="Search" data-ng-model="searchedText">
+        </div>
+        <!--<img class="pull-right cursorPointer m-r" style="height: 60px;" src="/assets/img/xls.png">-->
+        <!--<i ng-class="{'hidden':xlsSpinner}" class="fa fa-spinner fa-spin padder pull-right"></i>-->
+    </div>
+
+    <div class="wrapper bg-white-only">
+        <label class="block">Tags List</label>
+        <div class="tag cursorPointer" data-ng-class="{'gainsboro': tag.selected}" data-ng-click="selectTag(tag);" data-ng-repeat="tag in tagsList">
+            #{{tag.name}}
+        </div>
+        <div>
+            <button class="btn btn-info" data-ng-click="getCustomers(true);">Get Customers</button>
+        </div>
+    </div>
+
+    <div class="hbox h-auto wrapper-xs">
+        <div ng-repeat="customer in customers | filter: searchedText"
+             class="animated fadeIn col-lg-4 col-sm-6 col-xs-12 wrapper-xs pull-none inline v-top">
+            <div class="bg-white-only b-a r-2x wrapper-md btn"
+                 data-ng-click="detailedCustomer(customer);">
+                <div class="hbox h-auto">
+                    <div class="col v-top cover-pic">
+                        <div ng-style="customer.userpic ? {'background-image': 'url(' + customer.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                    </div>
+                    <div class="hbox h-auto v-top text-left">
+                        <div class="col pull-left m-l-md rating" style="width: calc(100% - 80px);">
+                            <div class="font-bold text-ellipsis">{{customer.fullName}}</div>
+                            <rating data-ng-model="customer.rating" max="5" state-on="'fa-star feedbackColor m-r-xs'" state-off="'fa-star-o m-r-xs'" readonly="true"></rating>
+                            <span class="feedbackColor text-nowrap">{{customer.rating}} | 5</span>
+                            <div class="m-t-md">Last Visit: <span class="font-bold text-nowrap">{{customer.lastReservationDate}}</span></div>
+                            <div>Total Spent: <span class="font-bold text-nowrap">${{customer.totalSpent}}</span></div>
+                        </div>
+                        <div class="col pull-right text-right">
+                            <div>Visits: <span class="font-bold">{{customer.totalVisits}}</span></div>
+                            <div class="m-t-xs">
+                                <img src="/assets/img/bS.png" class="chart-sm" style="width: 30px;">
+                                <span class="font-bold">{{customer.bsVisits}}/{{customer.bsReservations}}</span>
+                            </div>
+                            <div class="m-t-xs">
+                                <img src="/assets/img/venue_snapshot/gL.png" class="chart-sm" style="width: 30px;">
+                                <span class="font-bold">{{customer.glVisits}}/{{customer.glReservations}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center col-sm-12 col-xs-12 m-b" data-ng-if="customers.length !== 0 && hasMoreCustomers">
+        <button class="btn btn-sm btn-info" data-ng-click="getCustomers(false);">
+            Show more
+        </button>
+    </div>
+</div>

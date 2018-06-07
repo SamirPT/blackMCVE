@@ -1,0 +1,31 @@
+<div class="no-border bg-white wrapper-md b-a r">
+    <div class="hbox">
+        <div class="col cover-pic" ng-class="{'opacityScheduleStatus' : checkPrevious(empl.requestStatus)}">
+            <div ng-style="empl.logoUrl ? {'background-image': 'url(' + empl.logoUrl + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+        </div>
+        <div class="col padder text-left" ng-class="{'opacityScheduleStatus' : checkPrevious(empl.requestStatus)}">
+            <div class="font-bold text-ellipsis">{{empl.name}}</div>
+            <div class="display-label">Since: {{empl.since | date: "dd.MM.yyyy"}}</div>
+        </div>
+        <div class="col thumb-lg text-right v-middle">
+            <div class="btn-group dropup pull-right">
+                <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                    <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                </div>
+                <ul class="dropdown-menu">
+                    <li class="text-center">
+                        <a ng-if="checkPrevious(empl.requestStatus)"
+                           data-ng-click="updatePromoRequest(empl)">Restore</a>
+                    </li>
+                    <li class="text-center">
+                        <a ng-if="!checkPrevious(empl.requestStatus)"
+                           data-ng-click="deletePromoRequest(empl)">Delete</a>
+                    </li>
+                    <li class="text-center">
+                        <a ng-click="cancel()">Cancel</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+.bg-facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.bg-btn-mrblack {
+    background-color: #5d97de;
+    color: #fff;
+}
+
+.bg-dark-btn {
+    background-color: #232735;
+    text-decoration: underline;
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    .max-form-width {
+        max-width: 360px;
+        margin: auto;
+    }
+}
+
+.bg-dark-btn:hover, .bg-dark-btn:focus {
+    text-decoration: underline;
+    color: #c1c1c1;
+}

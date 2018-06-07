@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="mrblack.auth">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mr.Black</title>
+
+	<link href="@routes.Assets.versioned("libs/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("libs/bootstrap/dist/css/bootstrap-theme.min.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("libs/angular-ui-select/dist/select.min.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("libs/angularjs-toaster/toaster.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("simple-line-icons/css/simple-line-icons.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("stylesheets/animate/animate.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("stylesheets/app.css")" rel="stylesheet">
+	<link href="@routes.Assets.versioned("stylesheets/style.auth.css")" rel="stylesheet">
+</head>
+<body class="h-full">
+	<div class="app h-auto bg-dark dker app-header-fixed" ui-view></div>
+
+	<script src="@routes.Assets.versioned("libs/jquery/dist/jquery.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angular/angular.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/bootstrap/dist/js/bootstrap.min.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angular-animate/angular-animate.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angular-bootstrap/ui-bootstrap-tpls.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angular-resource/angular-resource.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angular-ui-router/angular-ui-router.min.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angular-ui-select/dist/select.min.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angular-ui-utils/ui-mask.js")" type="application/javascript"></script>
+	<script src="@routes.Assets.versioned("libs/angularjs-toaster/toastr.min.js")" type="application/javascript"></script>
+
+	<script src="assets/auth/app.js" type="application/javascript"></script>
+	<script src="assets/auth/modules/signup/signup.controller.js" type="application/javascript"></script>
+	<script src="assets/auth/modules/signin/signin.controller.js" type="application/javascript"></script>
+	<script src="assets/auth/modules/confirm/confirm.controller.js" type="application/javascript"></script>
+	<script src="assets/auth/service/user.service.js" type="application/javascript"></script>
+	<script src="assets/auth/service/toastr.service.js" type="application/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<div class="nav-tabs-alt" >
+    <ul class="nav nav-tabs bg-white" role="tablist">
+        <li class="active">
+            <a data-target="#tab-1" role="tab" data-toggle="tab">
+                Employees
+            </a>
+        </li>
+        <li>
+            <a data-target="#tab-2" role="tab" data-toggle="tab">
+                Requesting
+            </a>
+        </li>
+        <li ng-if="!isPromo">
+            <a data-target="#tab-3" role="tab" data-toggle="tab">
+                Promoters
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="tab-1">
+        <div class="wrapper-xs hbox" ng-if="people.approvedPeoples.length > 0">
+            <div>
+                <div ng-repeat="empl in people.approvedPeoples | filter: {'requestStatus': 'APPROVED'}" class="col-xs-12 col-sm-6 col-lg-4 wrapper-xs inline pull-none"
+                     data-ng-include="'/assets/main/modules/menu/employees/empl.item.html'"></div>
+            </div>
+            <div>
+                <div ng-repeat="empl in people.approvedPeoples | filter: {'requestStatus': 'PREVIOUS'}" class="col-xs-12 col-sm-6 col-lg-4 wrapper-xs inline pull-none"
+                     data-ng-include="'/assets/main/modules/menu/employees/empl.item.html'"></div>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane tab-2" id="tab-2">
+        <div class="wrapper-xs hbox" ng-if="people.peoplesRequests.length > 0">
+            <div class="text-muted wrapper-xs" ng-if="!isPromo">Requested Employees</div>
+            <div ng-repeat="empl in people.peoplesRequests" class="col-xs-12 col-sm-6 col-lg-4 wrapper-xs inline pull-none"
+                 data-ng-include="'/assets/main/modules/menu/employees/empl.item.html'"></div>
+        </div>
+        <div class="wrapper-xs hbox" ng-if="people.promotersRequests.length > 0">
+            <div class="text-muted wrapper-xs">Requested Promoters</div>
+            <div ng-repeat="empl in people.promotersRequests" class="col-xs-12 col-sm-6 col-lg-4 wrapper-xs inline pull-none"
+                 data-ng-include="'/assets/main/modules/menu/employees/promo.item.html'"></div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane tab-3" id="tab-3">
+        <div class="wrapper-xs hbox" ng-if="people.approvedPromoters.length > 0">
+            <div>
+                <div ng-repeat="empl in people.approvedPromoters | filter: {'requestStatus': 'APPROVED'}" class="col-xs-12 col-sm-6 col-lg-4 wrapper-xs inline pull-none"
+                     data-ng-include="'/assets/main/modules/menu/employees/promo.item.html'"></div>
+            </div>
+            <div>
+                <div ng-repeat="empl in people.approvedPromoters | filter: {'requestStatus': 'PREVIOUS'}" class="col-xs-12 col-sm-6 col-lg-4 wrapper-xs inline pull-none"
+                     data-ng-include="'/assets/main/modules/menu/employees/promo.item.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

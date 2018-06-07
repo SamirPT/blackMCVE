@@ -1,0 +1,150 @@
+@import "var";
+
+.bottle-service-flag {
+  display: inline-block;
+  color: #000;
+  background-color: #B8E986;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 10px;
+  border-radius: 0 2px 2px 0;
+}
+
+.reservation {
+  display: inline-block;
+  float: none;
+  padding: 5px;
+
+  & .res-header {
+    text-align: right;
+    padding-bottom: 5px;
+
+    & .spend {
+      color: #C0B01A;
+      margin-right: 8px;
+    }
+
+    & .time-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: text-bottom;
+      margin-right: 5px;
+    }
+
+    & .time-arrived {
+      color: #53a269;
+      margin-right: 15px;
+    }
+  }
+
+  & .status-vline {
+    display: table-cell;
+    width: 6px;
+    background-color: #fff;
+
+    &.arrived {
+      background-color: @res-arrived;
+    }
+
+    &.no-show {
+      background-color: @res-no-show;
+    }
+
+    &.unassigned {
+      background-color: @res-unassigned;
+    }
+
+    &.released {
+      background-color: @res-released;
+    }
+
+    &.completed {
+      background-color: @res-completed;
+    }
+
+    &.confirmed {
+      background-color: @res-confirmed;
+    }
+
+    &.finalized {
+      background-color: @res-finalized;
+    }
+  }
+  
+  & .status {
+    &.arrived {
+      color: @res-arrived;
+    }
+
+    &.no-show {
+      color: @res-no-show;
+    }
+
+    &.unassigned {
+      color: @res-unassigned;
+    }
+
+    &.released {
+      color: @res-released;
+    }
+
+    &.completed {
+      color: @res-completed;
+    }
+
+    &.confirmed {
+      color: @res-confirmed;
+    }
+
+    &.finalized {
+      color: @res-finalized;
+    }
+  }
+
+  & .res-content {
+    display: table-cell;
+    padding: 15px 0 5px 0;
+    border: #dee5e7 solid;
+    border-width: 1px 1px 1px 0;
+    background-color: #fff;
+
+    & > div {
+      padding-left: 9px;
+      padding-right: 15px;
+      height: auto;
+      width: 100%;
+      display: table;
+      border-spacing: 0;
+    }
+
+    & > .spend {
+      padding-top: 7px;
+      padding-bottom: 7px;
+      background-color: #edf1f2;
+    }
+  }
+
+  & .res-divider {
+    height: 1px;
+    margin: 5px 0;
+    border-bottom: 1px #dee5e7 dashed;
+    width: 100%;
+
+    & + .res-divider {
+      display: none;
+    }
+  }
+
+  & .res-completion {
+    color: @res-completion-feedback;
+  }
+}
+
+.thumb-exs {
+  width: 26px;
+  height: 26px;
+}
+
+.bg-info {
+  background-color: #5898E4;
+}

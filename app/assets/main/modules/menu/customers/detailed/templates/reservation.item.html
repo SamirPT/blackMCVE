@@ -1,0 +1,69 @@
+<div class="padder-md hbox h-auto text-info-dker font-bold m-b-xs">
+    <div class="col" ng-if="table.tableInfo.id">{{bottleService[table.tableInfo.bottleServiceType]}} #{{table.tableInfo.placeNumber}}</div>
+    <div class="col pull-right" ng-if="table.bottleMin">Bottle Min {{table.bottleMin}}</div>
+</div>
+<div class="w-full bg-white-only box-shadow" ng-class="{'confirmed-past': table.status === 'CONFIRMED_COMPLETE'}" style="padding: 20px 0;">
+    <div class="padder-md">
+        <div class="hbox h-auto m-b-sm">
+            <div class="col v-top cover-pic">
+                <div ng-style="table.guestInfo.userpic ? {'background-image': 'url(' + table.guestInfo.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+            </div>
+            <div class="hbox h-auto v-top text-left">
+                <div class="col pull-left m-l-md rating">
+                    <div class="font-bold text-ellipsis">{{table.guestInfo.fullName}}</div>
+                    <div class="display-label">by {{table.bookedBy.fullName}}</div>
+                </div>
+                <div class="col pull-right text-right">
+                    <div class="font-bold" ng-class="statusColor(table.status)">{{reservationStatuses[table.status]}}</div>
+                    <div class="display-label" ng-if="table.status === 'CONFIRMED_COMPLETE'">{{table.reservationDate | date: "dd.MM.yyyy"}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="text-dark" ng-if="table.bookingNote">{{table.bookingNote}}</div>
+        <div class="m-b-sm m-t-sm">
+            <div class="text-xs" ng-if="table.staff.length > 0">Staff Assignment</div>
+            <div class="text-xs" ng-if="table.staff.length == 0">Staff: No Assignment</div>
+            <div ng-repeat="empl in table.staff">
+                <div class="font-bold m-t-xs m-b-xs" style="font-size: 12px;">
+                    <span class="v-middle">{{empl.name}}&nbsp;<span class="font-normal">({{roles[empl.role]}})</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="hbox m-t-sm" ng-if="table.status !== 'CONFIRMED_COMPLETE'" ng-repeat="reservation in [table]" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+        <div ng-if="table.status === 'CONFIRMED_COMPLETE'">
+            <div class="light-divider"></div>
+            <div class="hbox h-auto m-b-sm ">
+                <div class="col v-top cover-pic">
+                    <div ng-style="table.completedBy.userpic ? {'background-image': 'url(' + table.completedBy.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                </div>
+                <div class="hbox h-auto v-top text-left">
+                    <div class="col pull-left m-l-md">
+                        <div class="font-bold">Completed by</div>
+                        <div class="display-label">{{table.completedBy.name}} ({{table.completedBy.role}})</div>
+                    </div>
+                </div>
+            </div>
+            <div class="font-bold">Completion Info</div>
+            <div class="display-label">{{table.completionFeedback.message}}</div>
+        </div>
+    </div>
+    <div class="m-t-sm w-full bg-white-only hbox h-auto" style="padding: 10px 20px;" ng-if="table.status === 'CONFIRMED_COMPLETE'">
+        <div class="inline col-xs-6 pull-none no-padder">Table Min: <span class="font-bold">{{table.bottleMin}}</span></div>
+        <div class="inline col-xs-6 pull-none no-padder">Actual Spent: <span class="font-bold">${{table.totalSpent}}</span></div>
+        <div class="inline col-xs-6 pull-none no-padder">Payee Info: <span class="font-bold">{{table.payees.length > 0 ? "YES" : "NO"}}</span></div>
+        <div class="inline col-xs-6 pull-none no-padder feedbackColor">Photo Notes: <span class="font-bold">{{table.photos.length > 0 ? "YES" : "NO"}}</span></div>
+    </div>
+    <div class="padder-md m-t-md" ng-if="table.status === 'CONFIRMED_COMPLETE'">
+        <div class="hbox h-auto">
+            <div class="col v-top cover-pic">
+                <div ng-style="table.confirmedBy.userpic ? {'background-image': 'url(' + table.confirmedBy.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+            </div>
+            <div class="hbox h-auto v-top text-left">
+                <div class="col pull-left m-l-md">
+                    <div class="font-bold">Confirmed by</div>
+                    <div class="display-label">{{table.confirmedBy.name}} ({{table.confirmedBy.role}})</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

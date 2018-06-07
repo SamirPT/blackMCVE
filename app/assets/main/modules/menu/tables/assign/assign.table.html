@@ -1,0 +1,41 @@
+<div class="modal-header hbox">
+    <span class="font-bold">{{bottleService[table.tableInfo.bottleServiceType]}} #{{table.tableInfo.placeNumber}}</span>
+    <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+</div>
+<div class="modal-body wrapper-xs hbox bg-light scroll-pane" style="height: 250px; overflow: scroll">
+    <div class="wrapper-xs">
+        <label class="text-muted">Search: <input type="text" class="text-black" ng-model="reservationFilter"></label>
+    </div>
+    <div ng-repeat="reservation in reservations | filter: reservationFilter" class="wrapper-xs col-xs-12">
+        <div class="bg-white-only wrapper-sm no-border b-a r">
+            <div class="hbox">
+                <div class="col">
+                    <div class="hbox">
+                        <div class="col cover-pic">
+                            <div ng-style="reservation.guestInfo.userpic ? {'background-image': 'url(' + reservation.guestInfo.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                            <img src="/assets/img/must_enter.png" class="must-enter" ng-hide="!reservation.mustEnter">
+                        </div>
+                        <div class="col padder text-left">
+                            <div class="font-bold text-ellipsis">{{reservation.guestInfo.fullName}}</div>
+                            <div class="text-muted text-ellipsis text-xs">by {{reservation.bookedBy.fullName}}</div>
+                        </div>
+                    </div>
+                    <div class="text-xs m-t-sm hbox">
+                        <span class="note line-clamp" popover="{{reservation.bookingNote}}" popover-trigger="mouseenter">{{reservation.bookingNote}}</span>
+                    </div>
+                </div>
+                <div class="col thumb-lg text-center">
+                    <div class="text-black">+{{reservation.totalGuests - 1}} Guests</div>
+                </div>
+
+            </div>
+            <div class="hbox">
+                <div class="hbox" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+                <div class="col thumb-lg text-center">
+                    <div ng-if="table.reservationInfo.id != reservation.id" class="btn bg-info no-border padder text-sm" ng-click="assignTable(reservation)">Assign<i ng-if="loading" class="fa fa-spinner fa-spin"></i></div>
+                    <div ng-if="table.reservationInfo.id == reservation.id" class="btn bg-danger no-border padder text-sm" ng-click="unassignTable(reservation)" disabled>Unassign</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

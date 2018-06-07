@@ -1,0 +1,138 @@
+<div data-ng-if="approvedList === undefined || approvedList.length == 0" class="text-center">No reservations for the
+    day
+</div>
+<div data-ng-if="approvedList !== undefined && approvedList.length > 0">
+    <div data-ng-repeat="reservation in approvedList | filter: { guestInfo: { fullName : searchedText }}"
+         class="animated fadeIn wrapper-xs">
+        <div class="clearfix wrapper b-a r bg-white-only" ng-cloak>
+            <div class="col-sm-11 no-padder" data-ng-click="reservationEditing(reservation, false);"
+                 ng-class="{'cursorPointer' : permissions.canViewAndModifyAllReservations}">
+                <div class="hbox">
+                    <div class="user-image r-2x" style="display: table-cell;">
+                        <img data-ng-if="reservation.guestInfo.userpic"
+                             ng-src="{{reservation.guestInfo.userpic ? reservation.guestInfo.userpic : '/assets/img/default_pic.png'}}"
+                             style="height: 43px;"/>
+                        <img data-ng-if="!reservation.guestInfo.userpic" style="height: 40px;" class="m-n"
+                             src="/assets/img/default_pic.png"/>
+                        <img src="/assets/img/must_enter.png" class="must-enter-reservation"
+                             data-ng-if="reservation.mustEnter">
+                    </div>
+                    <div class="col padder text-left">
+                        <div class="font-bold text-ellipsis">{{reservation.guestInfo.fullName}}</div>
+                        <div class="text-muted text-ellipsis text-xs">by {{reservation.bookedBy.fullName}}</div>
+                    </div>
+                </div>
+                <div class="m-t-sm">
+                    <div class="text-xs m-t-sm m-b-xs" style="min-height: 3em;">
+                        {{reservation.bookingNote}}
+                    </div>
+                </div>
+                <div class="text-muted m-b-xs">
+                    <span data-ng-repeat="tag in reservation.tags" class="m-r-xs">
+                        #{{tag}}
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-1 no-padder">
+                <div class="text-center font-bold"><span>{{bottleServiceTypes[reservation.bottleService]}}</span><span
+                        data-ng-if="reservation.tableInfo.placeNumber"> #{{reservation.tableInfo.placeNumber}}</span>
+                </div>
+                <div class="text-center">+ {{reservation.guestsNumber || 0}} Guests</div>
+                <div class="text-center">{{statuses[reservation.status]}}</div>
+            </div>
+            <div class="hbox">
+                <div class="hbox" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+                <div class="col thumb-lg text-right">
+                    <div class="btn-group dropup pull-right">
+                        <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots"
+                             data-toggle="dropdown">
+                            <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li class="text-center" data-ng-click="assignTable(reservation);"
+                                data-ng-if="!reservation.tableInfo.id && permissions.canViewAndManageTableView">
+                                <a tabindex="-1" href="#">Assign</a>
+                            </li>
+                            <li class="text-center" data-ng-click="assignTable(reservation);"
+                                data-ng-if="!!reservation.tableInfo.id && permissions.canViewAndManageTableView">
+                                <a tabindex="-1" href="#">Unassign</a>
+                            </li>
+                            <li class="text-center" data-ng-click="moveReservation(reservation);">
+                                <a tabindex="-1" href="#">Move</a>
+                            </li>
+                            <li class="text-center" data-ng-click="addNote(false, reservation);">
+                                <a tabindex="-1" href="#">Add Note</a>
+                            </li>
+                            <li class="text-center" data-ng-click="changeReservationState(reservation.id, 'PENDING');"
+                                ng-if="reservation.status === 'APPROVED'">
+                                <a tabindex="-1" href="#">Unapprove</a>
+                            </li>
+                            <li class="text-center" data-ng-click="changeReservationState(reservation.id, 'NO_SHOW');"
+                                ng-if="reservation.status === 'APPROVED' || reservation.status === 'PENDING'">
+                                <a tabindex="-1" href="#">No Show</a>
+                            </li>
+                            <li class="text-center" data-ng-click="changeReservationState(reservation.id, 'APPROVED');">
+                                <a tabindex="-1" href="#">Approved</a>
+                            </li>
+                            <li class="text-center" data-ng-click="changeReservationState(reservation.id, 'ARRIVED');"
+                                ng-if="permissions.canArriveReservationsAndUseClicker && (reservation.status === 'APPROVED' || reservation.status === 'NO_SHOW')">
+                                <a tabindex="-1" href="#">Arrived</a>
+                            </li>
+                            <li class="text-center"
+                                data-ng-click="changeReservationState(reservation.id, 'PRE_RELEASED');"
+                                ng-if="permissions.canReleaseAndCompleteAllTables && reservation.status === 'ARRIVED'">
+                                <a tabindex="-1" href="#">Pre Released</a>
+                            </li>
+                            <li class="text-center" data-ng-click="changeReservationState(reservation.id, 'RELEASED');"
+                                ng-if="(permissions.canReleaseAndCompleteAllTables || permissions.canReleaseAndCompleteTablesAssignedToMe) && reservation.status === 'ARRIVED'">
+                                <a tabindex="-1" href="#">Released</a>
+                            </li>
+                            <li class="text-center"
+                                data-ng-click="changeReservationState(reservation.id, 'CONFIRMED_COMPLETE');"
+                                ng-if="permissions.canReleaseAndCompleteAllTables && reservation.status === 'COMPLETED'">
+                                <a tabindex="-1" href="#">Confirmed Complete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-ng-if="approvedListDeleted !== undefined && approvedListDeleted.length > 0">
+    <span>Deleted Reservations</span>
+    <div data-ng-repeat="reservation in approvedListDeleted | filter: { guestInfo: { fullName : searchedText }}"
+         style="overflow: hidden;" class="animated fadeIn wrapper-xs">
+        <div class="clearfix wrapper b-a r gray" ng-cloak>
+            <div class="col-sm-11 no-padder" data-ng-click="reservationEditing(reservation, false);"
+                 ng-class="{'cursorPointer' : permissions.canViewAndModifyAllReservations}">
+                <div class="hbox">
+                    <div class="user-image r-2x" style="display: table-cell;">
+                        <img data-ng-if="reservation.guestInfo.userpic"
+                             ng-src="{{reservation.guestInfo.userpic ? reservation.guestInfo.userpic : '/assets/img/default_pic.png'}}"
+                             style="height: 43px;"/>
+                        <img data-ng-if="!reservation.guestInfo.userpic" style="height: 40px;" class="m-n"
+                             src="/assets/img/default_pic.png"/>
+                        <img src="/assets/img/must_enter.png" class="must-enter-reservation"
+                             data-ng-if="reservation.mustEnter">
+                    </div>
+                    <div class="col padder text-left">
+                        <div class="font-bold text-ellipsis">{{reservation.guestInfo.fullName}}</div>
+                        <div class="text-muted text-ellipsis text-xs">by {{reservation.bookedBy.fullName}}</div>
+                    </div>
+                </div>
+                <div class="m-t-sm">
+                    <div class="text-xs m-t-sm m-b-xs" style="min-height: 2em;">
+                        {{reservation.bookingNote}}
+                    </div>
+                </div>
+                <div class="hbox" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+            </div>
+            <div class="col-sm-1 no-padder">
+                <div class="text-center"><img src="/assets/img/reservation_submit.png" class="thumb cursorPointer"
+                                              data-ng-click="activateReservation(reservation.id);"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

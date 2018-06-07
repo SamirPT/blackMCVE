@@ -1,0 +1,78 @@
+<div class="modal-header hbox">
+    <span class="font-bold" ng-if="create">Create Event</span>
+    <span class="font-bold" ng-if="!create">Event Details</span>
+    <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+</div>
+<div class="modal-body hbox no-padder">
+    <div class="bg-white hbox wrapper chooseEventContent">
+        <div class="col w-md w-auto-xs">
+            <div class="m-r">
+                <div class="panel m-b-xs b-a col-xs-12" data-ng-if="!event.pictureUrl">
+                    <div class="panel-body">Image not loaded</div>
+                </div>
+                <div data-ng-if="event.pictureUrl" class="w-full">
+                    <img  id="userpic" ng-src="{{event.pictureUrl}}" class="m-b w-full"/>
+                </div>
+            </div>
+            <div class="m-r">
+                <input id="fileInput" name="image" type="file" accept="image/*" style="display: none;" onchange="angular.element(this).scope().onFile(this.files[0])">
+                <div class="bootstrap-filestyle input-group">
+                <span class="group-span-filestyle input-group-btn" ng-if="permissions.canCreateAndModifyEventInfo">
+                    <label class="btn bg-info m-b pull-right" for="fileInput">
+                        <span class="glyphicon glyphicon-folder-open m-r"></span>Choose file
+                    </label>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <form name="eventForm" class="form-validation" ng-submit="actionEvent()">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Event Name*" ng-model="event.name"
+                           class="text-black form-control no-border b-b"
+                           ng-required="true">
+                </div>
+                <div class="input-group form-group">
+                    <label class="col v-middle">Event Date*</label>
+                    <input type="button" class="m-l m-r b-b btn bg-light lter" datepicker-popup="{{format}}" ng-click="open($event)"
+                           ng-model="event.date" is-open="opened" datepicker-options="dateOptions"
+                           ng-required="true" close-text="Close" ng-readonly="true" ng-disabled="!create"/>
+                </div>
+                <div class="input-group form-group w-full">
+                    <label class="col v-middle">Event Starts At*</label>
+                    <input type="text" name="startsAt" ui-mask="99:99" placeholder="HH:MM" ng-model="event.startsAt" ng-required="true"
+                           class="text-black form-control no-border b-b" data-model-view-value="true" ui-mask-placeholder>
+                </div>
+                <div class="input-group form-group w-full">
+                    <label class="col v-middle">Event Ends At*</label>
+                    <input type="text" name="endsAt" ui-mask="99:99" placeholder="HH:MM" ng-model="event.endsAt" ng-required="true"
+                           class="text-black form-control no-border b-b" data-model-view-value="true" ui-mask-placeholder>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" ng-model="event.description" rows="3" placeholder="Event Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="fbEventUrl" placeholder="Facebook Event URL" ng-model="event.fbEventUrl"
+                           class="text-black form-control no-border b-b">
+                </div>
+                <div class="form-group">
+                    <label class="col v-middle" style="padding-left: 12px;">Repeatable</label>
+                    <div class="col padder">
+                        <label class="i-switch m-t-xs m-r">
+                            <input ng-model="event.repeatable" type="checkbox">
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div ng-if="permissions.canCreateAndModifyEventInfo">
+                    <button type="submit" ng-disabled="eventForm.$invalid || spinner" class="btn bg-info pull-right">
+                        <span ng-if="create">Create</span>
+                        <span ng-if="!create">Update</span> Event
+                        <i ng-if="spinner" class="fa fa-spinner fa-spin"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

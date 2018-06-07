@@ -1,0 +1,11 @@
+<div ng-if="customerInfo.comingUpReservations.length > 0" class="hbox h-auto">
+    <div ng-repeat="table in customerInfo.comingUpReservations" class="col-xs-12 no-padder m-b-sm m-t-sm"
+         ng-include="'/assets/main/modules/menu/customers/detailed/templates/reservation.item.html'">
+    </div>
+</div>
+<div ng-if="customerInfo.pastReservations.length > 0" class="hbox h-auto">
+    <div class="text-info-dker font-bold padder-md m-b-xs m-t-xs">Past</div>
+    <div ng-repeat="table in customerInfo.pastReservations" class="col-xs-12 no-padder m-b-sm m-t-sm"
+         ng-include="'/assets/main/modules/menu/customers/detailed/templates/reservation.item.html'">
+    </div>
+</div>

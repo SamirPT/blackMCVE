@@ -1,0 +1,101 @@
+<div class="bg-white hbox h-auto wrapper b-b b-a">
+    <div class="col text-nowrap">
+        <div class="btn bg-info no-shadow  m-r" ng-click="editTables()" data-ng-disabled="!spinner || events.length === 0">
+            <i class="icon-note"></i>
+            <span class="hidden-xs">Edit Tables</span>
+        </div>
+        <button class="btn btn-rounded btn-icon bg-white" ng-click="getPrevEventDate(date)"><i class="fa fa-angle-left fa-lg"></i></button>
+        <input type="button" class="b-a btn bg-light lter" datepicker-popup="{{format}}" show-button-bar="false" ng-click="open($event)" ng-model="date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-change="getEvents(date)" style="width: 220px;"/>
+        <button class="btn btn-rounded btn-icon bg-white" ng-click="getNextEventDate(date)"><i class="fa fa-angle-right fa-lg"></i></button>
+    </div>
+    <div class="col text-right v-middle">
+        <div class="btn no-padder m-l" ng-click="chooseEvent()">
+            <img src="/assets/img/calendar.png" style="width: 30px;">
+        </div>
+    </div>
+</div>
+<div class="nav-tabs-alt bg-white-only">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a data-target="#tab-1" role="tab" data-toggle="tab">
+                Tables
+            </a>
+        </li>
+        <li>
+            <a data-target="#tab-2" role="tab" data-toggle="tab">
+                Stand Up
+            </a>
+        </li>
+        <li>
+            <a data-target="#tab-3" role="tab" data-toggle="tab">
+                Bar
+            </a>
+        </li>
+    </ul>
+</div>
+<div ng-if="!spinner" class="text-center wrapper">
+    <i class="fa fa-spinner fa-2x fa-spin padder"></i>
+</div>
+<div ng-if="events.length === 0 && spinner" class="wrapper-lg text-center">
+    <span class="text-2x text-danger">Venue is closed</span><br>
+    No events on this date.
+</div>
+<div class="tab-content" ng-if="currentEvent.id && spinner && events.length > 0">
+    <div role="tabpanel" class="tab-pane active" id="tab-1">
+        <div class="wrapper-xs">
+            <div class="hbox">
+                <div class="col-sm-12 col-md-6 col-lg-4 no-padder">
+                    <div ng-repeat="table in tables.tables.opened" class="wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                    <div ng-repeat="table in tables.tables.closed" class="wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-8 no-padder">
+                    <div ng-repeat="table in tables.tables.assigned" class="grid-item col-lg-6 wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane tab-2" id="tab-2">
+        <div class="wrapper-xs">
+            <div class="hbox">
+                <div class="col-sm-12 col-md-6 col-lg-4 no-padder">
+                    <div ng-repeat="table in tables.standups.opened" class="wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                    <div ng-repeat="table in tables.standups.closed" class="wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-8 no-padder">
+                    <div ng-repeat="table in tables.standups.assigned" class="grid-item col-lg-6 wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane tab-3" id="tab-3">
+        <div class="wrapper-xs">
+            <div class="hbox">
+                <div class="col-sm-12 col-md-6 col-lg-4 no-padder">
+                    <div ng-repeat="table in tables.bars.opened" class="wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                    <div ng-repeat="table in tables.bars.closed" class="wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-8 no-padder">
+                    <div ng-repeat="table in tables.bars.assigned" class="grid-item col-lg-6 wrapper-xs">
+                        <div data-ng-include="'/assets/main/modules/menu/tables/table.item.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="bg-white w-full h-full" style="display: table;">
+    <div class="form-group">
+        <div class="m-t m-b">
+            <button class="btn btn-rounded btn-icon bg-white" ng-click="changeDate()"><i class="fa fa-angle-left fa-lg"></i></button>
+            <input type="button" class="b btn bg-light lter" datepicker-popup="{{format}}" ng-click="open($event)" ng-model="date" is-open="opened" datepicker-options="dateOptions" ng-required="true" show-button-bar="false" close-text="Close" ng-change="getEventsList()"/>
+            <button class="btn btn-rounded btn-icon bg-white" ng-click="changeDate(true)"><i class="fa fa-angle-right fa-lg"></i></button>
+            <i ng-class="{'hidden':spinner}" class="fa fa-spinner fa-spin padder"></i>
+
+            <button class="btn btn-primary btn-addon m-l" data-ng-click="createReservation();" ng-if="permissions.canViewAndModifyAllGuestListResos || permissions.canViewAndModifyAllReservations">
+                <i class="fa fa-plus"></i>Add reservation
+            </button>
+
+            <span class="pull-right m-r" data-ng-if="!currentEvent.id">No selected event</span>
+            <button popover="Current Event is {{currentEvent.name}}" popover-placement="bottom" popover-trigger="mouseenter" class="btn btn-default pull-right m-r" data-ng-if="currentEvent.id" data-ng-click="changeEvent();">Change Event</button>
+            <i ng-class="{'hidden':changeEventSpinner}" class="fa fa-spinner fa-spin padder pull-right"></i>
+        </div>
+
+        <div class="col-md-8" data-ng-if="!!snapshot && events.length > 0">
+            <div class="panel b-a">
+                <div class="panel-heading no-border bg-primary">
+                    <span class="text-lt"><span class="font-bold">{{venueName}}</span>: {{snapshot.eventInfo.name}}</span>
+                </div>
+                <div class="hbox text-center b-b b-light text-black">
+                    <a href class="col padder-v b-r b-light" ui-sref="reservations({tab: '1', id: venueId})">
+                        <img src="/assets/img/venue_snapshot/gL.png" class="thumb">
+                        <span class="block">Guestlist</span>
+                        <span class="font-bold">{{snapshot.guestList}}</span>
+                    </a>
+                    <a href class="col padder-v b-r b-light" ui-sref="tables({id: venueId})" data-ng-if="permissions.canViewAndManageTableView">
+                        <img src="/assets/img/venue_snapshot/seated.png" class="thumb">
+                        <span class="block">Seated</span>
+                        <span class="font-bold">{{snapshot.seated}}</span>
+                    </a>
+                    <a href class="col padder-v b-r b-light" ui-sref="schedule({id: venueId})" data-ng-if="!permissions.canViewAndManageTableView">
+                        <img src="/assets/img/venue_snapshot/seated.png" class="thumb">
+                        <span class="block">Assigned</span>
+                        <span class="font-bold">{{snapshot.myReservations}}</span>
+                    </a>
+                    <a href class="col padder-v b-r b-light" ui-sref="reservations({tab: '2', id: venueId})">
+                        <img src="/assets/img/venue_snapshot/queue.png" class="thumb">
+                        <span class="block">Pending</span>
+                        <span class="font-bold">{{snapshot.queue}}</span>
+                    </a>
+                    <a href class="col padder-v" ui-sref="reservations({tab: '3', id: venueId})">
+                        <img src="/assets/img/venue_snapshot/approved.png" class="thumb">
+                        <span class="block">Approved</span>
+                        <span class="font-bold">{{snapshot.approved}}</span>
+                    </a>
+                </div>
+                <div class="hbox text-center bg-light">
+                    <div class="col padder-v">
+                        <div class="col text-left pull-left m-l-lg" style="display: inline-block;">
+                            <span class="font-bold">Door</span>
+                        </div>
+                        <div class="col text-left" style="display: inline-block;">
+                            <span class="block font-bold">{{snapshot.glGuysActual + snapshot.glGirlsActual + snapshot.bsGuysActual + snapshot.bsGirlsActual}}/{{snapshot.glBooked + snapshot.bsBooked}}</span>
+                            <span>Outs <span class="font-bold">{{snapshot.outs}}</span></span>
+                        </div>
+                    </div>
+                    <div class="col padder-v">
+                        <div class="chart-sm women pull-left m-l" style="display: inline-block;">{{(snapshot.glGirlsActual + snapshot.bsGirlsActual)/100}}%</div>
+                        <div class="chart-sm men pull-left m-l" style="display: inline-block;">{{(snapshot.glGuysActual + snapshot.bsGuysActual)/100}}%</div>
+                        <div class="chart-sm capacity" style="display: inline-block;">{{(snapshot.glGuysActual + snapshot.glGirlsActual + snapshot.bsGuysActual + snapshot.bsGirlsActual)/snapshot.capacity | limitTo:4}}%</div>
+                    </div>
+                </div>
+                <div class="hbox text-center bg-light">
+                    <div class="col padder-v">
+                        <div class="col text-left pull-left m-l-lg" style="display: inline-block;">
+                            <span class="font-bold">GL</span>
+                        </div>
+                        <div class="col text-left" style="display: inline-block;">
+                            <span class="block font-bold">{{snapshot.glGuysActual + snapshot.glGirlsActual}}/{{snapshot.glBooked}}</span>
+                        </div>
+                    </div>
+                    <div class="col padder-v">
+                        <div class="chart-sm women pull-left m-l" style="display: inline-block;">{{snapshot.glGirlsActual/100}}%</div>
+                        <div class="chart-sm men pull-left m-l" style="display: inline-block;">{{snapshot.glGuysActual/100}}%</div>
+                        <img data-ng-class="{'disabledClick': !permissions.canControlBsMinsAndCloseBsGl}" data-ng-click="changeVenueState('gl', false);" data-ng-if="snapshot.state.glClosed" src="/assets/img/venue_snapshot/lockActive.png" class="chart-sm cursorPointer">
+                        <img data-ng-class="{'disabledClick': !permissions.canControlBsMinsAndCloseBsGl}" data-ng-click="changeVenueState('gl', true);" data-ng-if="!snapshot.state.glClosed" src="/assets/img/venue_snapshot/lockUnactive.png" class="chart-sm cursorPointer">
+                    </div>
+                </div>
+                <div class="hbox text-center bg-light">
+                    <div class="col padder-v">
+                        <div class="col text-left pull-left m-l-lg" style="display: inline-block;">
+                            <span class="font-bold">BS</span>
+                        </div>
+                        <div class="col text-left" style="display: inline-block;">
+                            <span class="block font-bold">{{snapshot.bsGuysActual + snapshot.bsGirlsActual}}/{{snapshot.bsBooked}}</span>
+                            <span class="font-bold">${{snapshot.bsMinSpend}}</span>
+                        </div>
+                    </div>
+                    <div class="col padder-v">
+                        <div class="chart-sm women pull-left m-l" style="display: inline-block;">{{snapshot.bsGirlsActual/100}}%</div>
+                        <div class="chart-sm men pull-left m-l" style="display: inline-block;">{{snapshot.bsGuysActual/100}}%</div>
+                        <img data-ng-class="{'disabledClick': !permissions.canControlBsMinsAndCloseBsGl}" data-ng-click="changeVenueState('bs', false);" data-ng-if="snapshot.state.bsClosed" src="/assets/img/venue_snapshot/lockActive.png" class="chart-sm cursorPointer">
+                        <img data-ng-class="{'disabledClick': !permissions.canControlBsMinsAndCloseBsGl}" data-ng-click="changeVenueState('bs', true);" data-ng-if="!snapshot.state.bsClosed" src="/assets/img/venue_snapshot/lockUnactive.png" class="chart-sm cursorPointer">
+                    </div>
+                </div>
+            </div>
+            <div class="m-b" ng-if="permissions.canControlBsMinsAndCloseBsGl">
+                <button class="btn btn-info" data-ng-click="setTableMinimums();">Set Table Minimums</button>
+            </div>
+            <div class="m-b">
+                <div class="bg-white hbox">
+                    <div class="user-image r-2x" style="display: table-cell; vertical-align: top;">
+                        <img ng-src="{{snapshot.eventInfo.pictureUrl ? snapshot.eventInfo.pictureUrl : '/assets/img/default_pic.png'}}" style="height: 43px;"/>
+                    </div>
+                    <div class="col padder text-left rating">
+                        <div class="font-bold text-ellipsis">{{snapshot.eventInfo.name}}</div>
+                        <span>Start at {{snapshot.eventInfo.startsAt}}</span>
+                    </div>
+                </div>
+                <div style="padding-top: 0;">
+                    <span class="pull-left m-r-lg" style="padding-left: 55px;">{{snapshot.eventInfo.description}}</span>
+                </div>
+            </div>
+        </div>
+        <div ng-if="events.length === 0" class="wrapper-lg text-center">
+            No events on this date.
+        </div>
+    </div>
+</div>

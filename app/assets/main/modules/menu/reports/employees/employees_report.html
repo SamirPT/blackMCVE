@@ -1,0 +1,48 @@
+<div class="bg-white w-full h-full" style="display: table;">
+    <div class="nav-tabs-alt" >
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a data-target="#tab-1" role="tab" data-toggle="tab">
+                    Today
+                </a>
+            </li>
+            <li>
+                <a data-target="#tab-2" role="tab" data-toggle="tab">
+                    Week
+                </a>
+            </li>
+            <li>
+                <a data-target="#tab-3" role="tab" data-toggle="tab">
+                    Month
+                </a>
+            </li>
+            <li>
+                <a data-target="#tab-4" role="tab" data-toggle="tab">
+                    Date Range
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content bg-white">
+        <div role="tabpanel" class="tab-pane active" id="tab-1">
+            <div class="wrapper-md">
+                <div data-ng-include="'/assets/main/modules/menu/reports/employees/templates/today_template.html'"></div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane tab-2" id="tab-2">
+            <div class="wrapper-md">
+                <div data-ng-include="'/assets/main/modules/menu/reports/employees/templates/week_template.html'"></div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane tab-3" id="tab-3">
+            <div class="wrapper-md">
+                <div data-ng-include="'/assets/main/modules/menu/reports/employees/templates/month_template.html'"></div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-4">
+            <div class="wrapper-md">
+                <div data-ng-include="'/assets/main/modules/menu/reports/employees/templates/range_template.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="modal-header hbox h-auto">
+    <div class="col font-bold v-middle">
+        <span ng-if="permission">Reservation complete</span>
+        <span ng-if="!permission">Add Note</span>
+    </div>
+    <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+</div>
+<div class="modal-body hbox no-padder">
+    <div class="text-center m-t-sm">
+        <div>{{::reservation.reservationDate | date: 'fullDate'}}</div>
+        <br>
+        <div class="font-bold">Client: {{::reservation.guestInfo.fullName}}</div>
+        <div>Booked by: {{::reservation.bookedBy.fullName}}</div>
+        <div>Assigned Staff: <span ng-repeat="staff in reservation.staff">{{::staff.name}}{{$last ? '' : ', '}}</span>
+        </div>
+    </div>
+    <div class="wrapper-md">
+        <div class="rating text-center">
+            <div class="font-bold">Your Rate</div>
+            <rating data-ng-model="reservation.completionFeedback.rating" max="5" class="text-3x"
+                    state-on="'fa-star feedbackColor m-r-xs'" state-off="'fa-star-o m-r-xs'"></rating>
+        </div>
+        <div class="md-input">
+            <textarea ng-model="reservation.completionFeedback.message"></textarea>
+            <label>Your comment</label>
+        </div>
+    </div>
+    <div ng-if="permission" class="">
+        <div class="wrapper-md hbox h-auto">
+            <div class="btn bg-info pull-right no-shadow text-xs" data-ng-click="addTags()">Add Tag</div>
+            <div class="tag" data-ng-repeat="tag in reservation.tags">
+                #{{tag}}
+            </div>
+        </div>
+    </div>
+    <div ng-if="permission" class="wrapper-md hbox h-auto bg-light lter">
+        <div class="col">
+            <span class="font-bold">Table #{{::reservation.tableInfo.placeNumber}} Spend</span><br>
+            <span> (including Tax, excluding tip)</span>
+        </div>
+        <div class="col">
+            <div class="md-input sub">
+                <input type="text" ng-model="reservation.totalSpent">
+                <label>Total</label>
+                <div class="sub-label">$</div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="permission" class="wrapper-xs hbox h-auto bg-light lter">
+        <div ng-repeat="pay in reservation.payees track by $index" class="b-b" style="padding-bottom: 15px;"
+             ng-include="'/assets/main/modules/menu/reservations/complete/pay.html'"></div>
+    </div>
+    <div ng-if="permission" class="btn bg-light lter no-shadow wrapper-md w-full no-radius text-info"
+         data-ng-click="addNewPayeeInfo()">Add New Payee
+        Info
+    </div>
+    <div ng-if="!permission" class="btn btn-info no-shadow wrapper-md w-full no-radius"
+         data-ng-disabled="btnDisabled()" data-ng-click="addNote()">Save
+    </div>
+    <div ng-if="permission" class="btn btn-info no-shadow wrapper-md w-full no-radius"
+         data-ng-disabled="btnDisabled()" data-ng-click="completeReservation()">Complete Reservation
+    </div>
+</div>

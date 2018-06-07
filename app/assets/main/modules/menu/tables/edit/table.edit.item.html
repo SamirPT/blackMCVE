@@ -1,0 +1,6 @@
+<div class="btn col no-border bg-white wrapper-sm bg-white b" ng-class="table.tableInfo.id == currentTable.tableInfo.id ? 'b-info' : 'b-white'" ng-click="setCurrent(table)">
+    <div class="hbox">
+        <div class="col text-left text-xs font-bold v-middle">{{bottleService[table.tableInfo.bottleServiceType]}} #{{table.tableInfo.placeNumber}}</div>
+        <button class="col btn btn-rounded btn-sm btn-icon btn-default pull-right" ng-click="deleteTable(table.tableInfo.id, $event)"><i class="fa fa-close"></i></button>
+    </div>
+</div>

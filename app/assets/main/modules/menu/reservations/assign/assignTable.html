@@ -1,0 +1,24 @@
+<div class="modal-header hbox">
+    <h4 class="modal-title">Reservation for {{reservation.guestInfo.fullName}}</h4>
+</div>
+<div class="modal-body wrapper-xs hbox">
+    <div data-ng-repeat="table in tables" class="wrapper-xs col-sm-4 col-xs-6">
+        <div class="b-a" style="border-radius: 2px;">
+            <div class="panel-body">
+                <div class="h-auto bg-white-only noRightPadding">
+                    <div class="col v-middle">
+                        <div class="hbox" style="height: auto;">
+                            <div class="font-bold">{{bottleService[table.tableInfo.bottleServiceType]}}</div>
+                            <div class="font-bold">#{{table.tableInfo.placeNumber}}</div>
+                        </div>
+                    </div>
+                    <div class="col b-l bg-white thumb-lg text-center v-middle">
+                        <div ng-if="table.reservationInfo.id !== reservation.id" class="btn bg-info m-l" data-ng-click="assignTable(table)">Assign<i data-ng-if="loading && thisId === table.tableInfo.id" class="fa fa-spinner fa-spin"></i></div>
+                        <div ng-if="table.reservationInfo.id === reservation.id" class="btn bg-danger m-l" data-ng-click="unassignTable(table)">Unassign<i data-ng-if="loading && thisId === table.tableInfo.id" class="fa fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer clearBoth"></div>

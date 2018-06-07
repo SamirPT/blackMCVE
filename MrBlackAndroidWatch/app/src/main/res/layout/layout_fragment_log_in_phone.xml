@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:t="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_h2"
+        android:textColor="@color/whiteText"
+        android:text="@string/log_in_phone_text"
+        android:gravity="center"
+        android:padding="@dimen/big_padding"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColorHint="@color/greyText"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/big_padding"
+        android:layout_marginEnd="@dimen/big_padding"
+        android:layout_marginTop="@dimen/big_padding"
+        t:errorTextAppearance="@style/AppTheme.InputTextHint"
+        t:hintTextAppearance="@style/AppTheme.InputTextHint">
+
+        <tech.peller.mrblackandroidwatch.utils.PhoneEditText
+            android:id="@+id/phoneNumberET"
+            style="@style/reservationDetailEditText"
+            android:layout_width="match_parent"
+            android:hint="@string/log_in_phone_text"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:singleLine="true"
+            android:gravity="center"
+            android:text="+1"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_button_height"
+        android:background="@color/mainButton"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_h1"
+        android:textStyle="bold"
+        android:text="@string/button_next"/>
+</LinearLayout>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <ScrollView
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#000"
+        android:scrollbars="none"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/resRelease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/reservation_element_margin"
+                android:layout_marginBottom="@dimen/big_padding">
+
+                <ImageView
+                    android:layout_width="@dimen/main_menu_element_image_dimen"
+                    android:layout_height="@dimen/main_menu_element_image_dimen"
+                    android:src="@drawable/res_menu_icon_release"
+                    android:layout_marginStart="@dimen/big_padding"
+                    android:layout_marginEnd="@dimen/main_padding"
+                    android:contentDescription="@string/empty_image_desc"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteText"
+                    android:textSize="@dimen/text_size_h1"
+                    android:text="@string/release_reservation"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/resCancelRelease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/reservation_element_margin"
+                android:layout_marginBottom="@dimen/big_padding"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/main_menu_element_image_dimen"
+                    android:layout_height="@dimen/main_menu_element_image_dimen"
+                    android:src="@drawable/res_menu_icon_release"
+                    android:layout_marginStart="@dimen/big_padding"
+                    android:layout_marginEnd="@dimen/main_padding"
+                    android:contentDescription="@string/empty_image_desc"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteText"
+                    android:textSize="@dimen/text_size_h1"
+                    android:text="@string/cancel_release_reservation"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/liveSpendEnter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/big_padding">
+
+                <ImageView
+                    android:layout_width="@dimen/main_menu_element_image_dimen"
+                    android:layout_height="@dimen/main_menu_element_image_dimen"
+                    android:src="@drawable/res_menu_icon_live_spend_enter"
+                    android:layout_marginStart="@dimen/big_padding"
+                    android:layout_marginEnd="@dimen/main_padding"
+                    android:contentDescription="@string/empty_image_desc"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteText"
+                    android:textSize="@dimen/text_size_h1"
+                    android:text="@string/enter_live_spend"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/liveSpendView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/big_padding">
+
+                <ImageView
+                    android:layout_width="@dimen/main_menu_element_image_dimen"
+                    android:layout_height="@dimen/main_menu_element_image_dimen"
+                    android:src="@drawable/res_menu_icon_live_spend_view"
+                    android:layout_marginStart="@dimen/big_padding"
+                    android:layout_marginEnd="@dimen/main_padding"
+                    android:contentDescription="@string/empty_image_desc"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteText"
+                    android:textSize="@dimen/text_size_h1"
+                    android:text="@string/view_live_spend"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewMinSignatures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/reservation_element_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/main_menu_element_image_dimen"
+                    android:layout_height="@dimen/main_menu_element_image_dimen"
+                    android:src="@drawable/res_menu_icon_view_sign"
+                    android:layout_marginStart="@dimen/big_padding"
+                    android:layout_marginEnd="@dimen/main_padding"
+                    android:contentDescription="@string/empty_image_desc"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteText"
+                    android:textSize="@dimen/text_size_h1"
+                    android:text="@string/view_min_signatures"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_button_height"
+        android:background="@color/mainButton"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_h1"
+        android:textStyle="bold"
+        android:text="@string/backButton"/>
+</LinearLayout>

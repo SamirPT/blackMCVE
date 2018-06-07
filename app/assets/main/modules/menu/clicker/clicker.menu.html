@@ -1,0 +1,16 @@
+<form name="vipForm" class="bg-white hbox h-auto wrapper">
+    <div class="btn bg-white b-a no-shadow padder-lg m-r" ng-click="back()">Back</div>
+</form>
+<div class="wrapper-xs">
+    <div ng-repeat="(key, value) in alertType" class="btn m-b-xs bg-white no-border no-padder" ng-click="selectAlert(key)">
+        <div class="hbox wrapper b" ng-class="{'b-info' : key == selectedAlert}">
+            <div class="col text-center v-middle" style="height: 50px; width: 50px;">
+                <img ng-src="/assets/img/locker/{{key}}.png" style="max-height: 50px; max-width: 50px;">
+            </div>
+            <div class="col v-middle text-left text-md padder-md">{{value}}</div>
+            <div class="col pull-right" style="padding-top: 8px;" ng-if="key == selectedAlert">
+                <div class="btn bg-info padder-lg" ng-click="sendAlert(key)">Send</div>
+            </div>
+        </div>
+    </div>
+</div>

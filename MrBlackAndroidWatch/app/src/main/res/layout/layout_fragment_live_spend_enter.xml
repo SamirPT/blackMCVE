@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:t="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_h2"
+        android:textColor="@color/whiteText"
+        android:text="@string/live_spend_enter_title"
+        android:gravity="center"
+        android:padding="@dimen/big_padding"/>
+
+    <TextView
+        android:id="@+id/liveSpendPrevious"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/text_size_h3"
+        tools:text="Previous = $10"
+        android:gravity="center"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColorHint="@color/greyText"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/big_padding"
+        android:layout_marginEnd="@dimen/big_padding"
+        android:layout_marginTop="@dimen/big_padding"
+        t:errorTextAppearance="@style/AppTheme.InputTextHint"
+        t:hintTextAppearance="@style/AppTheme.InputTextHint">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/liveSpendET"
+            style="@style/reservationDetailEditText"
+            android:layout_width="match_parent"
+            android:hint="@string/live_spend_enter_hint"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:singleLine="true"
+            android:gravity="center"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_button_height"
+        android:background="@color/mainButton"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_h1"
+        android:textStyle="bold"
+        android:text="@string/live_spend_enter_button"
+        android:layout_marginBottom="1dp"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_button_height"
+        android:background="@color/mainButton"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_h1"
+        android:textStyle="bold"
+        android:text="@string/backButton"/>
+</LinearLayout>

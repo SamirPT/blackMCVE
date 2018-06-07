@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "467036982489",
+    "firebase_url": "https://mrblackandroidwatch.firebaseio.com",
+    "project_id": "mrblackandroidwatch",
+    "storage_bucket": "mrblackandroidwatch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467036982489:android:c431a7aacf0b28ed",
+        "android_client_info": {
+          "package_name": "tech.peller.mrblackandroidwatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467036982489-7onpm71fcji056banp0g34igfd7alvuh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvTvKidugcRb9iI6g36rV-aomwC4q_wIU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

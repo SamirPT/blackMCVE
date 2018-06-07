@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wifiLL"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/big_padding"
+    android:paddingEnd="@dimen/big_padding"
+    android:paddingTop="@dimen/main_padding"
+    android:paddingBottom="@dimen/main_padding"
+    android:background="@color/eventItemBack">
+
+    <TextView
+        android:id="@+id/wifiTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/text_size_h2"
+        tools:text="Wifi title"/>
+    <TextView
+        android:id="@+id/wifiSignalStr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lightGreyText"
+        android:textSize="@dimen/text_size_h3"
+        tools:text="Strong"/>
+</LinearLayout>

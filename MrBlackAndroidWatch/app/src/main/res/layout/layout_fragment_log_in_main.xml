@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:weightSum="5"
+        android:gravity="center"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/main_logo"
+            android:contentDescription="@string/empty_image_desc"
+            android:layout_weight="2"
+            android:layout_marginBottom="@dimen/main_padding"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/text_size_h1"
+            android:textStyle="bold"
+            android:textColor="@color/whiteText"
+            android:text="@string/log_in_mr_black"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/logInButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_button_height"
+        android:background="@color/mainButton"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_h1"
+        android:textStyle="bold"
+        android:text="@string/button_log_in"/>
+</LinearLayout>

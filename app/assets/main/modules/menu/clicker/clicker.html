@@ -1,0 +1,79 @@
+<div class="bg-white-only h-full">
+    <div class="bg-white-only h-box">
+        <div class="btn b-a btn-lg no-shadow btn-icon btn-rounded pull-right m" ng-click="callMenu()">
+            <i class="fa fa-phone"></i>
+        </div>
+        <div class="container w-xxl w-auto-xs">
+            <div class="wrapper-xs">
+                <ui-select ng-model="clickerTypes.selected" theme="bootstrap" style="margin: auto; width: 100px;">
+                    <ui-select-match placeholder="Type">{{$select.selected}}</ui-select-match>
+                    <ui-select-choices repeat="type in clickerTypes.types | filter: $select.search">
+                        <div ng-bind-html="type | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="text-center wrapper text-2x">
+                <div class="text-muted">Total: {{stats.totalOut}} out / {{stats.totalIn}} in</div>
+            </div>
+            <div class="hbox text-center">
+                <div class="col-xs-4">
+                    <div class="chart women">
+                        <span class="text-white">{{percentWomen || 0}}%</span>
+                    </div>
+                    <div class="text-sm m-t-sm" style="color: #CD52BE;">Women<br>
+                        <span class="font-bold">{{stats.women || 0}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="chart men">
+                        <span class="text-white">{{percentMen || 0}}%</span>
+                    </div>
+                    <div class="text-sm m-t-sm" style="color: #5898E4;">Men<br>
+                        <span class="font-bold">{{stats.men || 0}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="chart capacity">
+                        <span class="text-black">{{percentCapacity || 0}}%</span>
+                    </div>
+                    <div class="text-sm text-black m-t-sm">Capacity<br>
+                        <span class="font-bold">{{stats.men + stats.women}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center wrapper">
+                <div class="hbox">
+                    <div class="col">
+                        <div class="btn btn-rounded lter no-padder no-border" data-ng-disabled="clickerTypes.selected == 'Only In'" ng-click="delMember(false)">
+                            <img ng-src="/assets/img/clicker/womenMinus.png" class="thumb-lg">
+                        </div>
+                    </div>
+                    <div class="m-t-lg" style="color: #CC52BD;">Women<br><span class="font-bold">{{clicked.women}}</span></div>
+                    <div class="col">
+                        <div class="btn btn-rounded lter no-padder no-border" data-ng-disabled="clickerTypes.selected == 'Only Out'" ng-click="addMember(false)">
+                            <img ng-src="/assets/img/clicker/womenPlus.png" class="thumb-lg">
+                        </div>
+                    </div>
+                </div>
+                <div class="hbox">
+                    <div class="font-bold btn btn-lg btn-icon btn-rounded bg-light dker b-black" ng-click="updateStats(clicked.men, clicked.women)">
+                        <span class="text-base" style="line-height: 42px;">{{clicked.women + clicked.men}}</span>
+                    </div>
+                </div>
+                <div class="hbox">
+                    <div class="col">
+                        <div class="btn btn-rounded dker no-padder no-border" data-ng-disabled="clickerTypes.selected == 'Only In'" ng-click="delMember(true)">
+                            <img ng-src="/assets/img/clicker/menMinus.png" class="thumb-lg">
+                        </div>
+                    </div>
+                    <div class="m-t-lg" style="color: #23b7e5;">Men<br><span class="font-bold">{{clicked.men}}</span></div>
+                    <div class="col">
+                        <div class="btn btn-rounded dker no-padder no-border" data-ng-disabled="clickerTypes.selected == 'Only Out'" ng-click="addMember(true)">
+                            <img ng-src="/assets/img/clicker/menPlus.png" class="thumb-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

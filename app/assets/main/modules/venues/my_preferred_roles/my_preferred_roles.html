@@ -1,0 +1,34 @@
+<div class="bg-white hbox h-auto wrapper-sm">
+    <div class="col thumb-lg">
+        <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+    </div>
+    <div class="col text-left padder">
+        <div class="font-bold text-ellipsis">{{venue.name}}</div>
+        <div class="text-ellipsis">{{venue.address}}</div>
+        <div>Capacity: <span class="font-bold">{{venue.capacity}}</span></div>
+        <div ng-hide="venue.requestStatus === 'PREVIOUS'">Status: <span ng-class="status[venue.requestStatus].colorClass">{{status[venue.requestStatus].name}}</span></div>
+    </div>
+    <div class="col thumb-md">
+        <div class="btn btn-lg btn-rounded btn-lg btn-icon pull-right" ng-click="discardRequest()"><i class="fa fa-trash-o"></i></div>
+        <div class="btn b-a bg-white-only" ui-sref="my_venues">Back</div>
+    </div>
+</div>
+
+<div class="text-center wrapper" ng-if="!venue.requestStatus" style="padding-bottom: 0;">
+    Before requesting employee access to this venue, please select your desired role/s.
+</div>
+
+<div class="wrapper-sm">
+    <div class="text-center" ng-if="loading">
+        <i class="fa fa-lg fa-spinner fa-spin"></i>
+    </div>
+    <div class="hbox h-auto">
+        <div ng-repeat="(code, role) in roles" class="col-xs-6 col-md-3 no-padder b">
+            <div class="btn btn-addon block" ng-class="{'active bg-info': preferred[code], 'bg-white': !preferred[code], 'disabled': venue.requestStatus === 'APPROVED' || venue.requestStatus === 'REQUESTED'}" ng-click="checkRole(code)">
+                <i class="fa fa-check text-white"></i>
+                <span class="text-ellipsis">{{role}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn pull-right bg-info m padder-lg" ng-hide="venue.requestStatus === 'APPROVED' || venue.requestStatus === 'REQUESTED'" ng-click="createRequest()">Send Request</div>

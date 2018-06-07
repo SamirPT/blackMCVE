@@ -1,0 +1,20 @@
+<div class="bg-white-only h-full">
+    <div class="bg-white-only h-box wrapper">
+        <div class="col-xs-12 no-padder">
+            <label>New #Tag</label>
+        </div>
+        <div class="col-xs-12 no-padder">
+            <div class=" col-sm-2 noLeftPadding">
+                <input data-ng-model="tagName" class="form-control" placeholder="Tag Name">
+            </div>
+            <button class="btn btn-info" data-ng-click="createTag();">Create Tag</button>
+        </div>
+        <div class="clearBoth"></div>
+        <div class="m-t-md">
+            <div class="form-group font-bold">Tags List</div>
+            <div class="tag" data-ng-repeat="tag in tagsList track by $index">
+                #{{tag}}<i class="glyphicon glyphicon-remove cursorPointer" style="color: silver; padding-left: 10px;" data-ng-click="deleteTag(tag);"></i>
+            </div>
+        </div>
+    </div>
+</div>

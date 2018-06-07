@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/text_size_h2"
+        android:text="@string/selectWifi"
+        android:padding="@dimen/main_padding"
+        android:gravity="center"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/wifiRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/noWifi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/text_size_h1"
+        android:text="@string/noWifi"
+        android:gravity="center"/>
+</LinearLayout>

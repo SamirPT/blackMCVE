@@ -1,0 +1,25 @@
+<div>
+    <div class="text-center font-bold padder" style="color: black; margin-top: 4px;">Facebook Permissions</div>
+    <div class="divider venueSettingsDivider"></div>
+    <div class="text-center font-normal cursorPointer venueSettingsListItem">Venue Info</div>
+    <div class="text-center font-normal cursorPointer venueSettingsListItem">Zones</div>
+    <div class="text-center font-normal cursorPointer venueSettingsListItem" data-ng-click="goToTagsView();" ng-if="permissions.canCreateAndModifyTags">Tags</div>
+    <div class="text-center font-normal cursorPointer venueSettingsListItem">Facebook</div>
+    <div class="divider venueSettingsDivider"></div>
+    <div class="text-center font-bold padder" style="color: black;">Notifications</div>
+    <div class="divider venueSettingsDivider"></div>
+    <div class="font-normal venueSettingsListItem">
+        SMS Messages
+        <label class="i-switch" style="cursor: default;">
+            <input disabled type="checkbox" data-ng-model="settings.smsMessages">
+            <i></i>
+        </label>
+    </div>
+    <div class="font-normal venueSettingsListItem">
+        In App Notifications
+        <label class="i-switch" style="cursor: default;">
+            <input disabled type="checkbox" data-ng-model="settings.inAppNotification">
+            <i></i>
+        </label>
+    </div>
+</div>

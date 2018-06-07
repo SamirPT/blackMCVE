@@ -1,0 +1,68 @@
+<div class="bg-white hbox h-auto wrapper-sm">
+    <div class="btn bg-info no-shadow btn-addon" ui-sref="venues">
+        <i class="fa fa-plus"></i>Add Venue
+    </div>
+</div>
+<div class="wrapper-xs col-xs-12" ng-if="myVenues.venues.length > 0">
+    <div class="wrapper-xs text-info-dker font-bold">Venues</div>
+    <div ng-repeat="venue in myVenues.venues" class="col-sm-6 col-lg-4 wrapper-xs">
+        <div class="btn no-padder" ng-click="selectVenue(venue)">
+            <div class="w-full no-radius no-padder bg-white cover-image">
+                <img class="w-full" ng-src="{{venue.coverUrl ? venue.coverUrl : '/assets/img/default_pic.png'}}"/>
+            </div>
+            <div class="bg-white hbox wrapper">
+                <div class="col thumb" style="height: 50px;">
+                    <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                </div>
+                <div class="col padder text-left">
+                    <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                    <div class="text-ellipsis">My Roles: <span ng-repeat="userRole in venue.preferredRoles">{{roles[userRole]}}{{$last ? '' : ', '}}</span></div>
+                </div>
+                <div class="col thumb-sm v-middle text-right">
+                    <div class="btn btn-rounded btn-icon no-border" ng-click="changeRoles(venue, $event)">
+                        <img src="/assets/img/tables/threeDots.png" class="thumb-xxs v-bottom">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-xs col-xs-12" ng-if="myVenues.events.length > 0">
+    <div class="wrapper-xs text-info-dker font-bold">Special Events</div>
+    <div ng-repeat="venue in myVenues.events" class="col-sm-6 col-lg-4 wrapper-xs">
+        <div class="btn no-padder" ng-click="selectVenue(venue)">
+            <div class="bg-white hbox wrapper">
+                <div class="col thumb" style="height: 50px;">
+                    <img ng-src="{{venue.logoUrl ? venue.logoUrl : '/assets/img/default_pic.png'}}"/>
+                </div>
+                <div class="col padder text-left">
+                    <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                    <div class="text-ellipsis">My Roles: <span ng-repeat="userRole in venue.preferredRoles">{{roles[userRole]}}{{$last ? '' : ', '}}</span></div>
+                </div>
+                <div class="col thumb-sm v-middle text-right">
+                    <div class="btn btn-rounded btn-icon no-border" ng-click="changeRoles(venue, $event)">
+                        <img src="/assets/img/tables/threeDots.png" class="thumb-xxs v-bottom">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-xs col-xs-12" ng-if="myVenues.promoters.length > 0">
+    <div class="wrapper-xs text-info-dker font-bold">Promoters</div>
+    <div ng-repeat="venue in myVenues.promoters" class="col-sm-6 col-lg-4 wrapper-xs">
+        <div class="btn no-padder" ng-click="selectVenue(venue)">
+            <div class="bg-white hbox wrapper">
+                <div class="col text-left">
+                    <div class="font-bold text-ellipsis">{{venue.name}}</div>
+                    <div class="text-ellipsis">My Roles: <span ng-repeat="userRole in venue.preferredRoles">{{promoRoles[userRole]}}{{$last ? '' : ', '}}</span></div>
+                </div>
+                <div class="col thumb-sm v-middle text-right">
+                    <div class="btn btn-rounded btn-icon no-border" ng-click="changeRoles(venue, $event)">
+                        <img src="/assets/img/tables/threeDots.png" class="thumb-xxs v-bottom">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

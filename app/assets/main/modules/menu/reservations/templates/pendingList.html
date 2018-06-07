@@ -1,0 +1,66 @@
+<div data-ng-if="pendingList === undefined || pendingList.length == 0" class="text-center">No reservations for the day</div>
+<div data-ng-if="pendingList !== undefined && pendingList.length > 0">
+    <div data-ng-repeat="reservation in pendingList | filter: { guestInfo: { fullName : searchedText }}" style="overflow: hidden;" class="animated fadeIn wrapper-xs">
+        <div class="clearfix wrapper b-a r bg-white-only" ng-cloak>
+            <div class="col-sm-11 no-padder" data-ng-click="reservationEditing(reservation, false);"
+                 ng-class="{'cursorPointer' : permissions.canViewAndModifyAllReservations}">
+                <div class="hbox">
+                    <div class="user-image r-2x" style="display: table-cell;">
+                        <img data-ng-if="reservation.guestInfo.userpic" ng-src="{{reservation.guestInfo.userpic ? reservation.guestInfo.userpic : '/assets/img/default_pic.png'}}" style="height: 43px;"/>
+                        <img data-ng-if="!reservation.guestInfo.userpic" style="height: 40px;" class="m-n" src="/assets/img/default_pic.png"/>
+                        <img src="/assets/img/must_enter.png" class="must-enter-reservation" data-ng-if="reservation.mustEnter">
+                    </div>
+                    <div class="col padder text-left">
+                        <div class="font-bold text-ellipsis">{{reservation.guestInfo.fullName}}</div>
+                        <div class="text-muted text-ellipsis text-xs">by {{reservation.bookedBy.fullName}}</div>
+                    </div>
+                </div>
+                <div class="m-t-sm">
+                    <div class="text-xs m-t-sm m-b-xs" style="min-height: 3em;">
+                        {{reservation.bookingNote}}
+                    </div>
+                    <div class="text-muted m-b-xs">
+                        <span data-ng-repeat="tag in reservation.tags" class="m-r-xs">
+                            #{{tag}}
+                        </span>
+                    </div>
+                </div>
+                <div class="hbox" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+            </div>
+            <div class="col-sm-1 no-padder" ng-if="permissions.canViewAndModifyAllReservations">
+                <div class="text-center"><img src="/assets/img/reservation_decline_icon.png" class="thumb-xs m-b cursorPointer" data-ng-click="declineReservation(reservation.id);"></div>
+                <div class="text-center"><img src="/assets/img/reservation_accept_icon.png" class="thumb-xs cursorPointer" data-ng-click="changeReservationState(reservation.id, 'APPROVED');"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-ng-if="pendingListDeleted !== undefined && pendingListDeleted.length > 0">
+    <span>Deleted Reservations</span>
+    <div data-ng-repeat="reservation in pendingListDeleted | filter: { guestInfo: { fullName : searchedText }}" class="animated fadeIn wrapper-xs">
+        <div class="clearfix wrapper b-a r gray" style="padding-bottom: 5px;" ng-cloak>
+            <div class="col-sm-11 no-padder" data-ng-click="reservationEditing(reservation, false);"
+                 ng-class="{'cursorPointer' : permissions.canViewAndModifyAllReservations}">
+                <div class="hbox">
+                    <div class="user-image r-2x" style="display: table-cell;">
+                        <img data-ng-if="reservation.guestInfo.userpic" ng-src="{{reservation.guestInfo.userpic ? reservation.guestInfo.userpic : '/assets/img/default_pic.png'}}" style="height: 43px;"/>
+                        <img data-ng-if="!reservation.guestInfo.userpic" style="height: 40px;" class="m-n" src="/assets/img/default_pic.png"/>
+                        <img src="/assets/img/must_enter.png" class="must-enter-reservation" data-ng-if="reservation.mustEnter">
+                    </div>
+                    <div class="col padder text-left">
+                        <div class="font-bold text-ellipsis">{{reservation.guestInfo.fullName}}</div>
+                        <div class="text-muted text-ellipsis text-xs">by {{reservation.bookedBy.fullName}}</div>
+                    </div>
+                </div>
+                <div class="m-t-sm">
+                    <div class="text-xs m-t-sm m-b-xs" style="min-height: 3em;">
+                        {{reservation.bookingNote}}
+                    </div>
+                </div>
+                <div class="hbox" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+            </div>
+            <div class="col-sm-1 no-padder">
+                <div class="text-center"><img src="/assets/img/reservation_submit.png" class="thumb cursorPointer" data-ng-click="activateReservation(reservation.id);"></div>
+            </div>
+        </div>
+    </div>
+</div>

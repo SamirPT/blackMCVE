@@ -1,0 +1,28 @@
+<div class="modal-header hbox">
+    <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+</div>
+<div class="modal-body hbox no-padder">
+    <div class="hbox h-auto bg-white-only wrapper-md">
+        <div class="col cover-pic">
+            <div ng-style="empl.userpic ? {'background-image': 'url(' + empl.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+        </div>
+        <div class="col padder text-left">
+            <div class="font-bold text-ellipsis">{{empl.fullName}}</div>
+            <div class="display-label">Since: {{empl.since | date:"dd.MM.yyyy"}}</div>
+        </div>
+    </div>
+    <div class="bg-light">
+        <div class="hbox h-auto wrapper-sm">
+            <div ng-repeat="(code, role) in roles" class="col-xs-6 col-md-4 no-padder b">
+                <div class="btn btn-addon block" ng-class="{'active bg-info': preferred[code], 'bg-white': !preferred[code]}" ng-click="checkRole(code)">
+                    <i class="fa fa-check text-white" style="position: absolute; left: 12px;"></i>
+                    <span class="text-ellipsis">{{role}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-sm text-right">
+            <div class="btn no-shadow bg-info dker" data-ng-click="updateState()">Update</div>
+            <div class="btn no-shadow bg-danger" data-ng-click="discardRequest()">Delete</div>
+        </div>
+    </div>
+</div>

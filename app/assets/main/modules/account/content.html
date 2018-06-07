@@ -1,0 +1,143 @@
+<div class="bg-white w-full h-full" style="display: table;">
+    <div class="nav-tabs-alt" >
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a data-target="#tab-1" role="tab" data-toggle="tab">
+                    Profile details
+                </a>
+            </li>
+            <!--<li>
+                <a data-target="#tab-2" role="tab" data-toggle="tab">
+                    My Roles
+                </a>
+            </li>-->
+            <li>
+                <a data-target="#tab-2" role="tab" data-toggle="tab">
+                    Settings
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tab-1">
+            <div class="wrapper-md">
+                <!--<div class="col-sm-12 row">
+                    <button class="btn m-b fb-button-color">
+                        <i class="fa fa-facebook text-white"></i><span class="text-white"> Connect with Facebook</span>
+                    </button>
+                </div>-->
+                <div>
+                    <div class="panel b-a col-sm-2" data-ng-if="!user.userpic">
+                        <div class="panel-body">Photo not loaded</div>
+                    </div>
+                    <img data-ng-if="user.userpic" id="userpic" ng-src="{{user.userpic}}" class="m-b userPicture"/>
+                </div>
+                <div class="col-sm-12 row">
+                    <input id="fileInput" name="image" type="file" accept="image/*" style="display: none;" onchange="angular.element(this).scope().onFile(this.files[0])">
+                    <div class="bootstrap-filestyle input-group"><span class="group-span-filestyle input-group-btn">
+                        <label class="btn btn-default m-b" for="fileInput"><span class="glyphicon glyphicon-folder-open"></span> Choose file</label>
+                    </span></div>
+                </div>
+
+                <div class="col-sm-12 row">
+                    <div class="col-lg-4 row">
+                        <label>Full Name</label>
+                        <input data-ng-model="user.fullName" class="form-control m-b m-r" placeholder="Full Name">
+                    </div>
+                    <div class="col-lg-4 m-l">
+                        <label>Date of Birth</label>
+                        <input readonly data-ng-model="bth" class="form-control m-b m-r">
+                    </div>
+                </div>
+                <div class="col-sm-12 row">
+                    <div class="col-lg-4 row">
+                        <label>Phone Number</label>
+                        <input readonly id="phone" ui-mask="+9 999 999 9999" ng-model="user.phoneNumber" placeholder="+_ ___ ___ ____"
+                               class="form-control m-b m-r" data-model-view-value="true">
+                    </div>
+                    <div class="col-lg-4 m-l">
+                        <label>Email</label>
+                        <input data-ng-model="user.email" class="form-control m-b" type="email" placeholder="email@domain.com" name="email">
+                    </div>
+                </div>
+                <div class="col-sm-12 row">
+                    <button class="btn btn-primary m-b m-r m-t" data-ng-click="updateProfile();">
+                        Update Profile
+                    </button>
+                    <button class="btn btn-danger m-b m-t" data-ng-click="deleteProfile();">
+                        Delete Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--<div role="tabpanel" class="tab-pane tab-2" id="tab-2">
+            <div class="wrapper-md">
+
+                <div class="panel b-a">
+                    <div class="panel-heading">Please mark prefered roles below</div>
+                    <div class="panel-body">
+                        <div ng-repeat="(code, role) in roles" class="col-xs-4 no-padder b">
+                            <div class="btn btn-addon block" data-ng-class="{'active bg-info': preferred[code], 'bg-white': !preferred[code]}" data-ng-click="checkRole(code)">
+                                <i class="fa fa-check text-white"></i>
+                                <span class="text-ellipsis">{{role}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div role="tabpanel" class="tab-pane tab-2" id="tab-2">
+            <div class="wrapper-md">
+                <ul class="list-group list-group-sm list-group-sp list-group-alt auto m-t">
+                    <!--<li class="list-group-item">
+                        <span class="text-muted">Facebook Permissions</span>
+                        <div class="m-b">
+                            <span class="text-md col-sm-2">Post on my behalf</span>
+                            <label class="i-switch">
+                                <input type="checkbox" data-ng-model="settings.postOnMyBehalf">
+                                <i></i>
+                            </label>
+                        </div>
+                        <div class="m-b">
+                            <span class="text-md col-sm-2">RSVP on my behalf</span>
+                            <label class="i-switch">
+                                <input type="checkbox" data-ng-model="settings.rsvpOnMyBehalf">
+                                <i></i>
+                            </label>
+                        </div>
+                        <div class="m-b">
+                            <span class="text-md col-sm-2">Check-in on my behalf</span>
+                            <label class="i-switch">
+                                <input type="checkbox" data-ng-model="settings.checkInOnMyBehalf">
+                                <i></i>
+                            </label>
+                        </div>
+                    </li>-->
+                    <li class="none"></li>
+                    <li class="list-group-item">
+                        <span class="text-muted">Notifications</span>
+                        <div class="m-b">
+                            <span class="text-md col-sm-2">SMS Messages</span>
+                            <label class="i-switch">
+                                <input type="checkbox" data-ng-model="settings.smsMessages">
+                                <i></i>
+                            </label>
+                        </div>
+                        <!--<div class="m-b">
+                            <span class="text-md col-sm-2">In App Notifications</span>
+                            <label class="i-switch">
+                                <input type="checkbox" data-ng-model="settings.inAppNotification">
+                                <i></i>
+                            </label>
+                        </div>-->
+                    </li>
+                </ul>
+                <div class="col-sm-12 row">
+                    <button class="btn btn-primary m-b m-r m-t" data-ng-click="updateProfile();">
+                        Update Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

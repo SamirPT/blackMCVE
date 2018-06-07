@@ -1,0 +1,139 @@
+<div ng-if="table.reservationInfo">
+    <div class="h-auto bg-white-only wrapper b-a r">
+        <div class="h-auto m-b-sm">
+            <div class="col no-border bg-white ">
+                <div class="font-bold m-b-sm">{{bottleService[table.tableInfo.bottleServiceType]}} #{{table.tableInfo.placeNumber}}</div>
+                <div class="hbox h-auto">
+                    <div class="col cover-pic">
+                        <div ng-style="table.reservationInfo.guestInfo.userpic ? {'background-image': 'url(' + table.reservationInfo.guestInfo.userpic + ')'} : {'background-image': 'url(/assets/img/default_pic.png)'};" class="r-2x square"></div>
+                        <img src="/assets/img/must_enter.png" class="must-enter" ng-hide="!table.reservationInfo.mustEnter">
+                    </div>
+                    <div class="col padder text-left">
+                        <div class="font-bold text-ellipsis">{{table.reservationInfo.guestInfo.fullName}}</div>
+                        <div class="text-muted text-ellipsis text-xs">by {{table.reservationInfo.bookedBy.fullName}}</div>
+                    </div>
+                </div>
+                <div class="text-xs m-t-sm hbox">
+                    <span class="note line-clamp" popover="{{table.reservationInfo.bookingNote}}" popover-trigger="mouseenter">{{table.reservationInfo.bookingNote}}</span>
+                </div>
+            </div>
+            <div class="col bg-white thumb-lg text-right" ng-if="table.reservationInfo.status != 'ARRIVED' && permissions.canArriveReservationsAndUseClicker">
+                <div class="btn no-border r-2x bg-info btn-sm padder" data-ng-disabled="arriveSpinner" ng-click="changeReservationState(table.reservationInfo.id, 'ARRIVED')" style="position: relative;">
+                    <span>Arrived</span>
+                    <div class="item-overlay r-2x bg-info text-center" ng-class="{'active': arriveSpinner && table.reservationInfo.id == currentClicked }">
+                        <i class="fa fa-spinner fa-spin" style="font-size: 24px;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col bg-white thumb-lg" ng-if="table.reservationInfo.status == 'ARRIVED'" style="position: relative">
+                <div class="item-overlay bg-white-opacity text-center" ng-class="{'active': guestSpinner && table.reservationInfo.id == currentClicked }">
+                    <i class="fa fa-spinner fa-spin padder-v" style="font-size: 30px;"></i>
+                </div>
+                <div class="hbox h-auto" ng-if="permissions.canArriveReservationsAndUseClicker || permissions.canWorkWithClicker">
+                    <div class="col">
+                        <div class="btn btn-rounded lter no-padder no-border thumb-xs" ng-click="guests(table.reservationInfo.id, 'FEMALE', 'DEC')">
+                            <img ng-src="/assets/img/clicker/womenMinus.png">
+                        </div>
+                    </div>
+                    <div class="text-xs text-center" style="color: #CC52BD;margin-top: 8px;">{{table.reservationInfo.arrivedGirls}}</div>
+                    <div class="col">
+                        <div class="btn btn-rounded lter no-padder no-border thumb-xs" ng-click="guests(table.reservationInfo.id, 'FEMALE', 'INC')">
+                            <img ng-src="/assets/img/clicker/womenPlus.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="hbox h-auto font-bold text-black" ng-class="(permissions.canArriveReservationsAndUseClicker || permissions.canWorkWithClicker) ? 'text-center' : 'text-right'">
+                    <span>{{table.reservationInfo.arrivedGuys + table.reservationInfo.arrivedGirls}}&nbsp;&nbsp;/&nbsp;&nbsp;{{table.reservationInfo.totalGuests}}</span>
+                </div>
+                <div class="hbox h-auto" ng-if="permissions.canArriveReservationsAndUseClicker || permissions.canWorkWithClicker">
+                    <div class="col">
+                        <div class="btn btn-rounded bg-dark dker no-padder no-border thumb-xs" ng-click="guests(table.reservationInfo.id, 'MALE', 'DEC')">
+                            <img ng-src="/assets/img/clicker/menMinus.png">
+                        </div>
+                    </div>
+                    <div class="text-xs text-center" style="color: #5897E3; margin-top: 8px;">{{table.reservationInfo.arrivedGuys}}</div>
+                    <div class="col">
+                        <div class="btn btn-rounded bg-dark dker no-padder no-border thumb-xs" ng-click="guests(table.reservationInfo.id, 'MALE', 'INC')">
+                            <img ng-src="/assets/img/clicker/menPlus.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-b-sm">
+            <div class="text-xs" ng-if="table.reservationInfo.staff.length > 0">Staff Assignment</div>
+            <div class="text-xs" ng-if="table.reservationInfo.staff.length == 0">Staff: No Assignment</div>
+            <div ng-repeat="empl in table.reservationInfo.staff">
+                <div class="font-bold m-t-xs m-b-xs" style="height: 24px;">
+                    <span class="v-middle">{{empl.name}}&nbsp;<span class="font-normal">({{roles[empl.role]}})</span></span>
+                    <div class="btn btn-rounded pull-right no-border no-padder delete-staff" ng-click="unassignStaffBatch(table.reservationInfo.id, empl)">
+                        <img ng-src="/assets/img/tables/deleteStaff.png" class="w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hbox">
+            <div class="hbox" ng-repeat="reservation in [table.reservationInfo]" ng-include="'/assets/main/modules/menu/reservations/templates/types.html'"></div>
+            <div class="col thumb-lg text-right">
+                <div class="btn-group dropup pull-right">
+                    <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                        <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                    </div>
+                    <ul class="dropdown-menu text-center">
+                        <li class="text-center"><a ng-click="menu('moveReservation',table)">Move</a></li>
+                        <li class="text-center"><a ng-click="unassignTable(table.reservationInfo.id)">Unassign</a></li>
+                        <li class="text-center" ng-if="permissions.canReleaseAndCompleteAllTables"><a ng-click="changeReservationState(table.reservationInfo.id, 'NO_SHOW')">No Show</a></li>
+                        <li class="text-center" ng-if="permissions.canReleaseAndCompleteAllTables || permissions.canReleaseAndCompleteTablesAssignedToMe"><a ng-click="changeReservationState(table.reservationInfo.id, 'RELEASED')">Release</a></li>
+                        <li class="text-center"><a ng-click="menu('assignStaff', table)">Assign Staff</a></li>
+                        <li class="text-center"><a ng-click="cancel()">Cancel</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="!table.reservationInfo && !table.tableInfo.closed">
+    <div class="h-auto bg-white-only wrapper b-a r">
+        <div class="col v-middle">
+            <div class="hbox">
+                <div class="font-bold">{{bottleService[table.tableInfo.bottleServiceType]}} #{{table.tableInfo.placeNumber}}</div>
+            </div>
+        </div>
+        <div class="col thumb-lg text-right">
+            <div class="btn-group dropup pull-right">
+                <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                    <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                </div>
+                <ul class="dropdown-menu">
+                    <li class="text-center"><a ng-click="menu('assignTable', table)">Assign</a></li>
+                    <li class="text-center" ng-if="permissions.canViewAndModifyAllGuestListResos || permissions.canViewAndModifyAllReservations"><a ng-click="createReservation(table)">New Reservation</a></li>
+                    <li class="text-center"><a ng-click="closeTable(table, true)">Close Table</a></li>
+                    <li class="text-center"><a ng-click="cancel()">Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="!table.reservationInfo && table.tableInfo.closed">
+    <div class="h-auto bg-white-only wrapper b-a r">
+        <div class="col v-middle">
+            <div class="hbox">
+                <div class="font-bold">
+                    {{bottleService[table.tableInfo.bottleServiceType]}} #{{table.tableInfo.placeNumber}}
+                    <span class="text-black">(Closed today)</span>
+                </div>
+            </div>
+        </div>
+        <div class="col thumb-lg text-right">
+            <div class="btn-group dropup pull-right">
+                <div class="btn btn-rounded btn-icon no-border no-shadow dropdown-toggle threeDots" data-toggle="dropdown">
+                    <img src="/assets/img/tables/threeDots.png" class="thumb-sm">
+                </div>
+                <ul class="dropdown-menu">
+                    <li class="text-center"><a ng-click="closeTable(table, false)">Open Table</a></li>
+                    <li class="text-center"><a ng-click="cancel()">Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

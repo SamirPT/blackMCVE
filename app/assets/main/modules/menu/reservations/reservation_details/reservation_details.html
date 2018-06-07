@@ -1,0 +1,251 @@
+<div class="modal-header hbox h-auto">
+    <h4 class="modal-title">{{::header}}
+        <button class="btn btn-default pull-right" data-ng-click="cancel()">Cancel</button>
+        <div class="btn btn-icon pull-right no-shadow bg-white no-border no-padder m-r w-auto h-auto" data-ng-click="deleteReservation(reservation.id);"
+             data-ng-if="!isNewReservation">
+            <i class="fa fa-lg fa-trash-o"></i>
+        </div>
+    </h4>
+</div>
+<div class="modal-body hbox h-auto" style="padding: 20px 5px;">
+    <div class="hbox h-auto m-b-sm padder" data-ng-if="!isNewReservation">
+        <div class="col text-center" style="width: 65px;">
+            <div class="user-image-md r-2x" style="width: 60px; margin: auto;">
+                <img data-ng-if="reservation.guestInfo.userpic"
+                     ng-src="{{reservation.guestInfo.userpic ? reservation.guestInfo.userpic : '/assets/img/default_pic.png'}}"
+                     style="height: 60px;"/>
+                <img data-ng-if="!reservation.guestInfo.userpic" style="height: 60px;" class="m-n"
+                     src="/assets/img/default_pic.png"/>
+            </div>
+            <div class="rating">
+                <rating data-ng-model="reservation.guestInfo.rating" max="5" state-on="'fa-star feedbackColor'"
+                        state-off="'fa-star-o'" readonly="true" style="font-size: 13px;"></rating>
+                <div>Visits: <span class="font-bold">{{reservation.guestInfo.totalVisits}}</span></div>
+            </div>
+        </div>
+        <div class="col padder">
+            <div>Booked by:
+                <nobr class="font-bold">{{reservation.bookedBy.fullName}}</nobr>
+            </div>
+            <div>Arrival Time:
+                <nobr>
+                    <span class="font-bold" data-ng-if="arrivalTime">{{arrivalTime}}</span>
+                    <span data-ng-if="!arrivalTime">Hasn't Arrived</span>
+                </nobr>
+            </div>
+        </div>
+        <div class="col thumb text-right">
+            <span class="btn text-center wrapper-xs no-shadow btn-warning text-xs"
+                  ng-click="feedbacksByUser(reservation)">
+                <span class="font-bold text-2x">{{reservation.guestInfo.feedbackCount}}</span><br>Notes
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-12 no-padder">
+        <div class="col-xs-8 col-sm-6">
+            <div class="md-input">
+                <input data-ng-change="searchUserByName(searchResult.name);"
+                       data-ng-model="searchResult.name"
+                       typeahead="result.name for result in searchResults | filter:$viewValue | limitTo:8"
+                       typeahead-on-select="onSelect($item)">
+                <label>Primary Guest Info</label>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-2">
+            <div class="md-input sub">
+                <input type="number" data-ng-model="reservation.guestsNumber">
+                <label>Guests</label>
+                <div class="sub-label">+</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 no-padder">
+        <div class="col-xs-8 col-sm-6">
+            <div class="md-input">
+                <input id="phone" data-ng-model="searchResult.phone"
+                       data-ng-change="searchUserByPhone(searchResult.phone)"
+                       typeahead="result.phone for result in searchResults | filter:$viewValue | limitTo:8"
+                       typeahead-on-select="onSelect($item)" ng-pattern="/^\+?(\d{11})$/">
+                <label>Phone Number</label>
+                <div class="error-label">Phone number must be 11 digits</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-2">
+            <div class="md-i-check">
+                <label>Notify Me</label>
+                <label class="i-switch i-switch-lg bg-info">
+                    <input type="checkbox" data-ng-model="reservation.notifyMgmtOnArrival">
+                    <i></i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 m-b-sm">
+        <div class="md-input">
+            <textarea data-ng-model="reservation.bookingNote" rows="2"></textarea>
+            <label>Booking note</label>
+        </div>
+    </div>
+    <div class="hbox h-auto padder m-b-sm" ng-if="permissions.canAssignTags">
+        <div class="btn bg-info pull-right no-shadow text-xs" data-ng-click="addTags()">Add Tag</div>
+        <div class="tag" data-ng-repeat="tag in reservation.tags" ng-click="removeTag(tag)">
+            #{{tag}}
+        </div>
+    </div>
+    <!--<div class="col-xs-12" data-ng-if="!isNewReservation">
+        <accordion close-others="false">
+            <accordion-group class="m-b" is-open="secondAccordionOpen">
+                <accordion-heading>
+                    Reservation Overview by Staff <i class="pull-right glyphicon" ng-class="{'glyphicon-minus': secondAccordionOpen, 'glyphicon-plus': !secondAccordionOpen}"></i>
+                </accordion-heading>
+                <div class="col-sm-3 m-l-n">
+                    <label>Total Spend</label>
+                    <input data-ng-model="reservation.totalSpent" class="form-control m-b">
+                </div>
+                <div class="col-sm-9 rating">
+                    <label>Total Rating</label>
+                    <div>
+                        <rating data-ng-model="reservation.rating" max="5" state-on="'fa-star feedbackColor'" state-off="'fa-star-o'" readonly="true" style="font-size: 24px;"></rating>
+                        <span class="feedbackColor" style="font-size: 16px;">{{reservation.rating || 0}} | 5</span>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>-->
+    <div class="col-xs-12 text-center m-b-sm">
+        <label class="i-checks i-checks-lg m-r">
+            <input type="radio" data-ng-disabled="hasTable" name="bsSelector" data-ng-model="bsSelector"
+                   ng-value="'gl'"><i></i>Guestlist
+        </label>
+        <label class="i-checks i-checks-lg">
+            <input type="radio" data-ng-disabled="hasTable" name="bsSelector" data-ng-model="bsSelector"
+                   ng-value="'bs'"><i></i>Bottle Service
+        </label>
+    </div>
+    <div class="col-xs-12 no-padder m-b-sm" data-ng-if="bsSelector === 'bs'">
+        <div class="col-xs-12 col-sm-8 no-padder">
+            <div class="col-xs-6">
+                <div class="md-input sub">
+                    <input data-ng-model="reservation.minSpend">
+                    <label>Min Spend</label>
+                    <div class="sub-label">$</div>
+                </div>
+            </div>
+            <div style="width: 0; position: relative; top: 20px; left: -6px; float: left;">or</div>
+            <div class="col-xs-6">
+                <div class="md-input">
+                    <input data-ng-model="reservation.bottleMin">
+                    <label>Bottle Min</label>
+                </div>
+            </div>
+            <div class="col-xs-12 text-left m-b-sm">
+                <div class="md-input">
+                    <input type="text" name="startsAt" ui-mask="99:99" ng-model="reservation.estimatedArrivalTime"
+                           data-model-view-value="true" class="md-ui-mask">
+                    <label>Estimated Time of Arrival</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div ng-if="!table.tableInfo.id">
+                <label class="btn bs-btn no-shadow block" data-ng-model="reservation.bottleService" btn-radio="'TABLE'"
+                       uncheckable>Table</label>
+                <label class="btn bs-btn no-shadow block" data-ng-model="reservation.bottleService"
+                       btn-radio="'STANDUP'" uncheckable>Standup</label>
+                <label class="btn bs-btn no-shadow block" data-ng-model="reservation.bottleService" btn-radio="'BAR'"
+                       uncheckable>Bar</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 text-center m-t-xs m-b">
+        <span style="font-size: 18px;" class="m-r-xs">Group</span>
+        <div class="inline v-middle">
+            <label class="btn btn-default no-shadow r-2x" data-ng-model="reservation.groupType" btn-radio="'ALL_GUYS'">Guys</label>
+            <label class="btn btn-default no-shadow r-2x" data-ng-model="reservation.groupType" btn-radio="'ALL_GIRLS'">Girls</label>
+            <label class="btn btn-default no-shadow r-2x" data-ng-model="reservation.groupType" btn-radio="'PROMO'">Promo</label>
+            <label class="btn btn-default no-shadow r-2x" data-ng-model="reservation.groupType"
+                   btn-radio="'MIX'">Mix</label>
+        </div>
+    </div>
+    <div class="col-xs-12 hbox text-center m-b-sm">
+        <div class="col">
+            <div>COMPS</div>
+            <div>
+                <label class="i-checks md-check girl-color text-xs">
+                    <input type="checkbox" data-ng-model="reservation.complimentGirls"
+                           data-ng-click="setCmplGirls();"><i></i>All Girls
+                </label>
+                <div class="md-input small-value">
+                    <input class="" data-ng-model="reservation.complimentGirlsQty"
+                           data-ng-disabled="!!reservation.complimentGirls"/>
+                </div>
+            </div>
+            <div>
+                <label class="i-checks md-check guy-color text-xs">
+                    <input type="checkbox" data-ng-model="reservation.complimentGuys"
+                           data-ng-click="setCmplGuys();"><i></i>All Guys
+                </label>
+                <div class="md-input small-value">
+                    <input data-ng-model="reservation.complimentGuysQty"
+                           data-ng-disabled="!!reservation.complimentGuys"/>
+                </div>
+                <br>
+            </div>
+            <div>
+                <label class="comps-color text-xs">Comps Group</label>
+                <div class="md-input small-value">
+                    <input data-ng-model="reservation.complimentGroupQty"/>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div>REDUCED</div>
+            <div>
+                <label class="i-checks md-check girl-color text-xs">
+                    <input type="checkbox" data-ng-model="reservation.reducedGirls"
+                           data-ng-click="setReducedGirls();"><i></i>All Girls
+                </label>
+                <div class="md-input small-value">
+                    <input class="" data-ng-model="reservation.reducedGirlsQty"
+                           data-ng-disabled="!!reservation.reducedGirls"/>
+                </div>
+            </div>
+            <div>
+                <label class="i-checks md-check guy-color text-xs">
+                    <input type="checkbox" data-ng-model="reservation.reducedGuys"
+                           data-ng-click="setReducedGuys();"><i></i>All Guys
+                </label>
+                <div class="md-input small-value">
+                    <input data-ng-model="reservation.reducedGuysQty" data-ng-disabled="!!reservation.reducedGuys"/>
+                </div>
+                <br>
+            </div>
+            <div>
+                <label class="reduced-color-color text-xs">Reduced Group</label>
+                <div class="md-input small-value">
+                    <input data-ng-model="reservation.reducedGroupQty"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="col-xs-12 text-right m-b-sm" ng-if="!isNewReservation">
+        <div class="btn btn-rounded btn btn-icon thumb-xxs" style="height: 30px;" ng-click="feedbacksByReservation(reservation)">
+            <img data-ng-if="reservation.feedbackCount" src="/assets/img/noteActive.png" class="thumb-xxs">
+            <img data-ng-if="!reservation.feedbackCount" src="/assets/img/noteNonactive.png" class="thumb-xxs">
+        </div>
+        <span class="text-muted" data-ng-class="{'feedback': reservation.feedbackCount}">{{reservation.feedbackCount}} notes</span>
+    </div>-->
+</div>
+<div class="modal-footer clearBoth">
+    <div>
+        <button class="btn btn-info" data-ng-click="completeReservation(true, reservation)"
+                ng-if="reservation.status === 'ARRIVED'">Complete reservation
+        </button>
+        <button class="btn btn-info" data-ng-click="createReservation();" data-ng-show="isNewReservation"
+                data-ng-disabled="loading">{{::btnTitle}} <i data-ng-if="loading" class="fa fa-spinner fa-spin"></i>
+        </button>
+        <button class="btn btn-info" data-ng-click="createReservation();" data-ng-show="!isNewReservation"
+                data-ng-disabled="loading">{{::btnTitle}} <i data-ng-if="loading" class="fa fa-spinner fa-spin"></i>
+        </button>
+    </div>
+</div>

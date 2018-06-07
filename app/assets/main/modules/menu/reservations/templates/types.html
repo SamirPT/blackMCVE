@@ -1,0 +1,66 @@
+<div class="col v-middle">
+    <nobr class="inline m-b-xs" style="padding-right: 10px;" ng-if="reservation.complimentGroupQty">
+        <img src="/assets/img/C.png" class="thumb-exs">
+        <span>{{::reservation.complimentGroupQty}}</span>
+    </nobr>
+    <nobr class="inline m-b-xs" style="padding-right: 10px;"
+          ng-if="reservation.complimentGirls || reservation.complimentGirlsQty || reservation.complimentGuys || reservation.complimentGuysQty">
+        <img ng-if="(reservation.complimentGirls || reservation.complimentGirlsQty) && (reservation.complimentGuys || reservation.complimentGuysQty)"
+             src="/assets/img/C_half.png" class="thumb-exs">
+        <span ng-if="(reservation.complimentGirls || reservation.complimentGirlsQty) && (reservation.complimentGuys || reservation.complimentGuysQty)">
+            <span ng-if="reservation.complimentGirls">All</span>
+            <span ng-if="!reservation.complimentGirls">{{::reservation.complimentGirlsQty || 0}}</span>
+            <span>/</span>
+            <span ng-if="reservation.complimentGuys">All</span>
+            <span ng-if="!reservation.complimentGuys">{{::reservation.complimentGuysQty || 0}}</span>
+        </span>
+
+        <img ng-if="!(reservation.complimentGuys || reservation.complimentGuysQty) && (reservation.complimentGirls || reservation.complimentGirlsQty)"
+             src="/assets/img/C_girls.png" class="thumb-exs">
+        <span ng-if="!(reservation.complimentGuys || reservation.complimentGuysQty) && (reservation.complimentGirls || reservation.complimentGirlsQty)">
+            <span ng-if="reservation.complimentGirls">All</span>
+            <span ng-if="!reservation.complimentGirls">{{::reservation.complimentGirlsQty || 0}}</span>
+        </span>
+
+        <img ng-if="!(reservation.complimentGirls || reservation.complimentGirlsQty) && (reservation.complimentGuys || reservation.complimentGuysQty)"
+             src="/assets/img/C_guys.png" class="thumb-exs">
+        <span ng-if="!(reservation.complimentGirls || reservation.complimentGirlsQty) && (reservation.complimentGuys || reservation.complimentGuysQty)">
+            <span ng-if="reservation.complimentGuys">All</span>
+            <span ng-if="!reservation.complimentGuys">{{::reservation.complimentGuysQty || 0}}</span>
+        </span>
+    </nobr>
+    <nobr class="inline m-b-xs" style="padding-right: 10px;" ng-if="reservation.reducedGroupQty">
+        <img src="/assets/img/R.png" class="thumb-exs">
+        <span>{{::reservation.reducedGroupQty}}</span>
+    </nobr>
+    <nobr class="inline m-b-xs" style="padding-right: 10px;"
+          ng-if="reservation.reducedGirls || reservation.reducedGirlsQty || reservation.reducedGuys || reservation.reducedGuysQty">
+        <img ng-if="(reservation.reducedGirls || reservation.reducedGirlsQty) && (reservation.reducedGuys || reservation.reducedGuysQty)"
+             src="/assets/img/R_half.png" class="thumb-exs">
+        <span ng-if="(reservation.reducedGirls || reservation.reducedGirlsQty) && (reservation.reducedGuys || reservation.reducedGuysQty)">
+            <span ng-if="reservation.reducedGirls">All</span>
+            <span ng-if="!reservation.reducedGirls">{{::reservation.reducedGirlsQty || 0}}</span>
+            <span>/</span>
+            <span ng-if="reservation.reducedGuys">All</span>
+            <span ng-if="!reservation.reducedGuys">{{::reservation.reducedGuysQty || 0}}</span>
+        </span>
+
+        <img ng-if="!(reservation.reducedGuys || reservation.reducedGuysQty) && (reservation.reducedGirls || reservation.reducedGirlsQty)"
+             src="/assets/img/R_girls.png" class="thumb-exs">
+        <span ng-if="!(reservation.reducedGuys || reservation.reducedGuysQty) && (reservation.reducedGirls || reservation.reducedGirlsQty)">
+            <span ng-if="reservation.reducedGirls">All</span>
+            <span ng-if="!reservation.reducedGirls">{{::reservation.reducedGirlsQty || 0}}</span>
+        </span>
+
+        <img ng-if="!(reservation.reducedGirls || reservation.reducedGirlsQty) && (reservation.reducedGuys || reservation.reducedGuysQty)"
+             src="/assets/img/R_guys.png" class="thumb-exs">
+        <span ng-if="!(reservation.reducedGirls || reservation.reducedGirlsQty) && (reservation.reducedGuys || reservation.reducedGuysQty)">
+            <span ng-if="reservation.reducedGuys">All</span>
+            <span ng-if="!reservation.reducedGuys">{{::reservation.reducedGuysQty || 0}}</span>
+        </span>
+    </nobr>
+    <nobr class="inline m-b-xs" data-ng-hide="!reservation.groupType">
+        <img src="/assets/img/G_grey.svg" class="thumb-exs">
+        <span>{{groupType[reservation.groupType]}}</span>
+    </nobr>
+</div>

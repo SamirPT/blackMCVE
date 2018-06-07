@@ -1,0 +1,12 @@
+<div class="modal-header hbox h-auto">
+    <div class="col font-bold v-middle">Add Tags</div>
+    <div class="btn b-a pull-right" ng-click="cancel()">Close</div>
+</div>
+<div class="modal-body hbox no-padder">
+    <div class="wrapper-md hbox h-auto">
+        <div class="tag cursorPointer" data-ng-class="{'gainsboro': tag.selected}" data-ng-click="selectTag(tag);" data-ng-repeat="tag in tags">
+            #{{tag.name}}
+        </div>
+    </div>
+</div>
+<div class="btn btn-info no-shadow wrapper-md w-full no-radius" data-ng-click="saveTags()">Save</div>
